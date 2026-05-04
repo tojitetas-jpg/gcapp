@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="w-layout-grid shop-product-grid">
+
+      <!-- 🟦 GALERÍA DEL PRODUCTO -->
+      <div class="shop-product-gallery">
+        <div class="shop-product-image-wrapper">
+          <img
+            src="{{ product.image.url }}"
+            alt="{{ product.name }}"
+            loading="lazy"
+            class="shop-product-image"
+          />
+        </div>
+      </div>
+
+      <!-- 🟦 DETALLES DEL PRODUCTO -->
+      <div class="shop-product-details">
+
+        <div class="shop-product-heading-wrapper">
+          <h1 class="heading-h3 heading-h3-product">{{ product.name }}</h1>
+
+          <div class="heading-h4 h4-product">
+            $ {{ product.price }} USD
+          </div>
+        </div>
+
+        <p class="paragraph-18">
+          {{ product.description }}
+        </p>
+
+        <!-- 🟦 BOTONES (NO TOCAR, SON DE WEBFLOW) -->
+        <div class="add-to-cart">
+          <form class="w-commerce-commerceaddtocartform">
+            <label class="form_field-label">Quantity</label>
+            <input type="number" min="1" value="1"
+              class="w-commerce-commerceaddtocartquantityinput form-input quantity-input" />
+
+            <div class="product-page-buttom-wrapper">
+              <input type="submit" class="w-commerce-commerceaddtocartbutton primary-button" value="Add to Cart" />
+              <a class="w-commerce-commercebuynowbutton secondary-button" href="/checkout">Buy now</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- 🟦 ACORDEONES (DETALLES, ENVÍO, DEVOLUCIONES) -->
+        <div class="shop-product-accordion-wrapper">
+
+          <!-- Detalles -->
+          <div class="shop-product-accordion">
+            <div class="shop-product-heading">
+              <div class="paragraph-18 text-weight-semibold">Details</div>
+              <div class="shop-product-accordion-icon">
+                <div class="icon-embed-xsmall w-embed">
+                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
+                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-accordion-details">
+              <div class="rich-text-block-product w-richtext">
+                {{ product.details|safe }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping -->
+          <div class="shop-product-accordion">
+            <div class="shop-product-heading">
+              <div class="paragraph-18 text-weight-semibold">Shipping</div>
+              <div class="shop-product-accordion-icon">
+                <div class="icon-embed-xsmall w-embed">
+                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
+                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-accordion-details">
+              <p class="paragraph-16 margin-bottom-16">
+                We offer fast and reliable shipping options. All orders are processed within 1–2 business days.
+              </p>
+            </div>
+          </div>
+
+          <!-- Returns -->
+          <div class="shop-product-accordion">
+            <div class="shop-product-heading">
+              <div class="paragraph-18 text-weight-semibold">Returns</div>
+              <div class="shop-product-accordion-icon">
+                <div class="icon-embed-xsmall w-embed">
+                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
+                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="shop-product-accordion-details">
+              <p class="paragraph-16 margin-bottom-16">
+                If you're not completely satisfied, return it within 30 days for a full refund.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ TESTIMONIOS (NO TOCADO) ⭐⭐⭐ -->
+<section class="section">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="quote-2-title-wrapper">
+      <h2 class="quote-2-ttitle">Customer Reviews</h2>
+      <p class="paragraph-18">These photos exceeded my expectations in every way.</p>
+    </div>
+
+    <!-- Slider intacto -->
+    <div data-delay="4000" data-animation="slide" class="product-testimonial-slider w-slider">
+      <div class="product-testimonial-mask w-slider-mask">
+        <!-- Slides originales -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="homepage-hero-section">
+  <div class="container">
+    <div class="hero-wrapper">
+      <div class="hero-text-wrapper">
+        <p class="hero-label">Somos GCapp</p>
+        <h1 class="display-heading-1"><strong>Tecnología con una segunda vida</strong></h1>
+        <div class="max-width-50rem">
+          <p words-slide-up="" text-split="" class="paragraph-20">Compra, vende o dona dispositivos electrónicos de
+            forma fácil y sostenible. Reparamos, reacondicionamos y reciclamos para reducir residuos y crear impacto
+            positivo.</p>
+        </div>
+        <div class="hero-buttons-container"><a href="/all-products" class="primary-button w-button">Tienda</a><a
+            href="/services" class="secondary-button w-button">servicios</a></div>
+      </div>
+      <div id="w-node-_56e548e9-1f27-74c2-8292-27a5ee61b480-f10188bd" class="hero-image"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210.png"
+          loading="eager" width="Auto" sizes="(max-width: 1536px) 100vw, 1536px" alt=""
+          srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-500.png 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-800.png 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-1080.png 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210.png 1536w"
+          class="hero-image" /><img src="https://cdn.prod.website-files.com/placeholder.svg" loading="lazy" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ PRODUCTOS POPULARES (DINÁMICO) ⭐⭐⭐ -->
+
+<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5" data-copilot="true" class="section section1">
+  <div class="container">
+    <div class="max-60rem-title-wrapper">
+      <p class="hero-label hero-label-white">Productos populares</p>
+    </div>
+
+    <div class="collection-list-wrapper w-dyn-list">
+      <div role="list" class="products-grid w-dyn-items">
+
+        {% for product in popular_products %}
+        <div role="listitem" class="products-item-wrapper w-dyn-item">
+          <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
+
+            <div class="products-item-image-wrapper">
+              <img class="products-item-image"
+                   src="{{ product.image.url }}"
+                   alt="{{ product.name }}"
+                   loading="lazy">
+            </div>
+
+            <div class="products-item-text-wrapper">
+              <h3 class="heading-h4 heading-h4-white">{{ product.name }}</h3>
+
+              <div class="products-item-description-wrapper">
+                <p class="product-list-desciption product-list-desciption-white">
+                  {{ product.description }}
+                </p>
+                <p class="product-list-desciption product-list-desciption-white">
+                  $ {{ product.price }} USD
+                </p>
+              </div>
+            </div>
+
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <div class="products-button-wrapper">
+      <a href="/category/cameras" class="primary-button button-white w-button">View All</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ MEJORES PRECIOS (DINÁMICO) ⭐⭐⭐ -->
+
+<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5" data-copilot="true" class="section section2">
+  <div class="container">
+    <div class="max-60rem-title-wrapper">
+      <p class="hero-label hero-label-white">Mejores precios</p>
+    </div>
+
+    <div class="collection-list-wrapper-2 w-dyn-list">
+      <div role="list" class="products-grid w-dyn-items">
+
+        {% for product in best_price_products %}
+        <div role="listitem" class="collection-item w-dyn-item">
+          <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
+
+            <div class="products-item-image-wrapper">
+              <img class="products-item-image"
+                   src="{{ product.image.url }}"
+                   alt="{{ product.name }}"
+                   loading="lazy">
+            </div>
+
+            <div class="products-item-text-wrapper">
+              <h3 class="heading-h4 heading-h4-white">{{ product.name }}</h3>
+
+              <div class="products-item-description-wrapper">
+                <p class="product-list-desciption product-list-desciption-white">
+                  {{ product.description }}
+                </p>
+                <p class="product-list-desciption product-list-desciption-white">
+                  $ {{ product.price }} USD
+                </p>
+              </div>
+            </div>
+
+          </a>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <div class="products-button-wrapper">
+      <a href="/category/lenses" class="primary-button button-white w-button">View All</a>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ TODO LO DEMÁS QUEDA IGUAL ⭐⭐⭐ -->
+
+<section class="section section3">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="heading-max-width-wrapper">
+      <h1 class="display-heading-1">Algunos de nuestros servicios</h1>
+    </div>
+    <div class="w-layout-grid services-grid-homepage">
+      <div id="w-node-_59aa5288-589a-950a-6296-0b209351f90e-f10188bd" class="services-card">
+        <h3 class="heading-h3">Reparaciones</h3>
+        <div class="paragraph-18">Nuestro equipo evalúa, repara y optimiza dispositivos electrónicos para devolverles su
+          funcionalidad y extender su vida útil.</div><a href="/services"
+          class="secondary-button pin-to-bottom w-button">Learn More</a>
+      </div>
+      <div id="w-node-_59aa5288-589a-950a-6296-0b209351f921-f10188bd" class="services-card center-card">
+        <h3 class="heading-h3">Reciclaje</h3>
+        <div class="paragraph-18">Desmontamos dispositivos irreparables para aprovechar piezas útiles y gestionar de
+          forma responsable los residuos electrónicos.</div><a href="/services"
+          class="secondary-button pin-to-bottom w-button">Learn More</a>
+      </div>
+      <div id="w-node-_0b11975f-4780-28d3-03f5-1c2d25d3ab5c-f10188bd" class="services-card">
+        <h3 class="heading-h3">Donaciones</h3>
+        <div class="paragraph-18">Recogemos dispositivos donados, los reacondicionamos y los entregamos a ONG, centros
+          educativos y personas que necesitan acceso a la tecnología.</div><a href="/services"
+          class="secondary-button w-button">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section4">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="collage-title-wrapper">
+      <h1 class="display-heading-1 display-heading-1-white"><strong class="bold-text">Donde lo antiguo vuelve a
+          brillar.</strong></h1>
+      <div class="max-width-40rem">
+        <p class="paragraph-32 white-text">Consolas retro, reproductores clásicos y gadgets inolvidables. Una selección
+          especial para fans de la tecnología de siempre.</p>
+      </div><a href="/about/login" class="primary-button button-white w-button">Shop Now</a>
+    </div>
+    <div class="collage-wrapper">
+      <div class="collage-center-image-wrapper"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fddff5fd26178cfb01_nml.avif"
+          loading="lazy" alt="" class="collage-center-image" /></div>
+      <div class="collage-small-image-wrapper image-1"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69bfd32f6843e2faf1018a33_interior.avif"
+          loading="lazy" alt="" class="collage-small-image" /></div>
+      <div class="collage-small-image-wrapper image-2"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio.jpg"
+          loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 940px"
+          srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio-p-500.jpg 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio-p-800.jpg 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio-p-1080.jpg 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio-p-1600.jpg 1600w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a71972f7262b6fe019c3_old-cassettes-and-radio.jpg 2000w"
+          alt="" class="collage-small-image" /></div>
+      <div class="collage-small-image-wrapper image-3"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fef3c32cf290a718fd_nm%2C..jpg"
+          loading="lazy" width="313" sizes="(max-width: 479px) 100vw, 313px" alt=""
+          srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fef3c32cf290a718fd_nm%2C.-p-500.jpg 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fef3c32cf290a718fd_nm%2C.-p-800.jpg 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fef3c32cf290a718fd_nm%2C.-p-1080.jpg 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fef3c32cf290a718fd_nm%2C..jpg 1460w"
+          class="collage-small-image" /></div>
+      <div class="collage-small-image-wrapper image-4"><img
+          src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fd36f4affd20fe5d77_image.webp"
+          loading="lazy" sizes="(max-width: 767px) 100vw, (max-width: 991px) 95vw, 940px"
+          srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fd36f4affd20fe5d77_image-p-500.webp 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fd36f4affd20fe5d77_image-p-800.webp 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fd36f4affd20fe5d77_image-p-1080.webp 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c1a8fd36f4affd20fe5d77_image.webp 1600w"
+          alt="" class="collage-small-image" /></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section5">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="quote-wrapper">
+      <div class="margin-bottom-48">
+        <div class="quote-title-wrapper">
+          <h1 class="display-heading-1">opiniones de los clientes</h1>
+          <div><em>(En desarrollo)</em></div>
+        </div>
+      </div>
+
+      <!-- Slider intacto -->
+      {{!-- No modificado --}}
+
+      <div data-delay="4000" data-animation="slide" class="quote-slider-2 w-slider" data-autoplay="false"
+        data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0"
+        data-nav-spacing="4" data-duration="500" data-infinite="true">
+
+        <div class="quote-mask-2 w-slider-mask">
+          <!-- Slides intactos -->
+          {{!-- No modificado --}}
+        </div>
+
+        <div class="quote-arrow arrow-left w-slider-arrow-left">
+          <div class="icon-2 w-icon-slider-left"></div>
+        </div>
+        <div class="quote-arrow w-slider-arrow-right">
+          <div class="icon-3 w-icon-slider-right"></div>
+        </div>
+        <div class="quote-slide-nav w-slider-nav w-slider-nav-invert w-round"></div>
+      </div>
+
+      <div class="w-layout-grid quote-metrtics-grid">
+        <div class="quote-metrics-wrapper">
+          <h2 class="quote-metrics-heading">600+</h2>
+          <div class="label-heading">satisfied cUSTOMERS</div>
+        </div>
+        <div class="quote-metrics-wrapper">
+          <h2 class="quote-metrics-heading">9 of 10</h2>
+          <div class="label-heading">Rate out Service as Excellent</div>
+        </div>
+        <div class="quote-metrics-wrapper">
+          <h2 class="quote-metrics-heading">97%</h2>
+          <div class="label-heading">recommend our Shop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
