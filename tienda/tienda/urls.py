@@ -32,4 +32,3 @@ urlpatterns = [
 
 ]
 
-#cambio 1
