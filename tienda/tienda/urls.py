@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 
+
 #views de cada app
 
 from core import views as core_views
@@ -24,6 +25,7 @@ urlpatterns = [
     #Productos
     path("all-products/", product_views.products, name="products"),
     path("product/<int:id>/", product_views.product, name="product"),
+    path('categorias/<slug:slug>/', product_views.category_products, name='category_products'),
 
     #Usuarios
     path("login/", user_views.login_view, name="login"),

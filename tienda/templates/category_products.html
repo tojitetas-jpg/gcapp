@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5" data-copilot="true"
+    class="section section-black-product">
+    <div class="container">
+
+        <!-- TÍTULO DE LA CATEGORÍA -->
+        <div class="max-60rem-title-wrapper">
+            <p class="hero-label hero-label-white">Category</p>
+            <h1 class="display-heading-1 display-heading-1-white">{{ category.name }}</h1>
+        </div>
+
+        <!-- LISTA DE PRODUCTOS -->
+        <div class="w-dyn-list">
+            <div role="list" class="products-grid w-dyn-items">
+
+                {% for product in products %}
+                <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c18e-f10189a7" role="listitem"
+                    class="collection-item-5 w-dyn-item">
+
+                    <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
+
+                        <!-- IMAGEN -->
+                        <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c190-f10189a7"
+                            class="products-item-image-wrapper">
+                            <img class="products-item-image"
+                                src="{{ product.image.url }}"
+                                alt="{{ product.name }}"
+                                loading="lazy">
+                        </div>
+
+                        <!-- TEXTO -->
+                        <div class="products-item-text-wrapper">
+                            <h3 class="heading-h4 heading-h4-white">{{ product.name }}</h3>
+
+                            <div class="products-item-description-wrapper">
+                                <p class="product-list-desciption product-list-desciption-white">
+                                    {{ product.description }}
+                                </p>
+
+                                <p class="product-list-desciption product-list-desciption-white">
+                                    € {{ product.price }}
+                                </p>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+                {% empty %}
+                <p class="heading-h4 heading-h4-white">No hay productos en esta categoría.</p>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

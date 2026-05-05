@@ -6,6 +6,7 @@
 
 <head>
   <meta charset="utf-8" />
+
   <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous" />
   <title>GCapp| Webflow HTML website template</title>
   <meta
@@ -76,68 +77,51 @@
         class="nav-logo w-inline-block w--current">
         <div class="text-block-2">GCapp</div>
       </a>
-      <nav role="navigation" id="w-node-_616a8897-8a00-58ac-8dfa-9276fe651a79-fe651a75"
-        class="nav-links-conatiner w-nav-menu">
-        <div data-hover="false" data-delay="0" class="nav-dropdown w-dropdown">
-          <div class="nav-link nav-link-dropdown w-dropdown-toggle">
+
+<nav role="navigation" id="w-node-_616a8897-8a00-58ac-8dfa-9276fe651a79-fe651a75"
+    class="nav-links-conatiner w-nav-menu">
+    <div data-hover="false" data-delay="0" class="nav-dropdown w-dropdown">
+        <div class="nav-link nav-link-dropdown w-dropdown-toggle">
             <div class="text-block">Shop</div>
             <div class="nav-arrow w-icon-dropdown-toggle"></div>
-          </div>
-          <nav class="nav_dropdown-list w-dropdown-list">
-            <div class="w-layout-grid grid-3"><a id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a79-fe651a75"
-                href="/all-products" class="link-block-2 w-inline-block">
-                <div class="text-block-5">All Products</div>
-              </a>
-              <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7c-fe651a75"
-                class="collection-list-wrapper-7 w-dyn-list">
-                <div role="list" class="collection-list-4 w-dyn-items">
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/fotografia-y-video" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Fotografia y video</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/game-devices" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Game Devices</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/audio-devices" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Audio Devices</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/computers" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Computers</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/tablets" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Tablets</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/smartphones" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">SmartPhones</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/productospopulares" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Productos Populares</div>
-                    </a></div>
-                  <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75" role="listitem"
-                    class="collection-item-4 w-dyn-item"><a href="/category/mejoresprecios" target="_blank"
-                      class="link-block-2 w-inline-block">
-                      <div class="text-block-4">Mejores Precios</div>
-                    </a></div>
+        </div>
+        <nav class="nav_dropdown-list w-dropdown-list">
+            <div class="w-layout-grid grid-3">
+
+                <!-- ALL PRODUCTS (igual que Webflow) -->
+                <a id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a79-fe651a75"
+                    href="/all-products" class="link-block-2 w-inline-block">
+                    <div class="text-block-5">All Products</div>
+                </a>
+
+                <!-- CATEGORÍAS DINÁMICAS (Django) -->
+                <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7c-fe651a75"
+                    class="collection-list-wrapper-7 w-dyn-list">
+                    <div role="list" class="collection-list-4 w-dyn-items">
+
+                        {% for cat in categories %}
+                        <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7e-fe651a75"
+                            role="listitem" class="collection-item-4 w-dyn-item">
+
+                            <a href="{% url 'category_products' cat.slug %}"
+                                class="link-block-2 w-inline-block">
+                                <div class="text-block-4">{{ cat.name }}</div>
+                            </a>
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
                 </div>
-              </div>
+
             </div>
-          </nav>
-        </div><a href="/services" class="nav-link">Services</a><a href="#News" class="nav-link">Blog</a><a href="/about"
-          class="nav-link">About</a>
-      </nav>
+        </nav>
+    </div>
+    <a href="/services" class="nav-link">Services</a>
+    <a href="#News" class="nav-link">Blog</a>
+    <a href="/about" class="nav-link">About</a>
+</nav>
+
       <div class="nav-menu-button w-nav-button">
         <div class="navha-hamburger-button w-hidden-main"><img
             src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69bfd32f6843e2faf10188d2_Hamburger%20icon.svg"
