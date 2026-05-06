@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5" data-copilot="true"
-    class="section section-black-product">
-    <div class="container">
+<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5"
+         data-copilot="true"
+         class="section section-black-product">
+
+    <!-- WRAPPER WEBFLOW QUE FALTABA -->
+    <div class="w-layout-blockcontainer container w-container">
 
         <!-- TÍTULO DE LA CATEGORÍA -->
         <div class="max-60rem-title-wrapper">
@@ -16,18 +19,20 @@
             <div role="list" class="products-grid w-dyn-items">
 
                 {% for product in products %}
-                <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c18e-f10189a7" role="listitem"
-                    class="collection-item-5 w-dyn-item">
+                <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c18e-f10189a7"
+                     role="listitem"
+                     class="collection-item-5 w-dyn-item">
 
-                    <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
+                    <a href="{% url 'product' product.id %}"
+                       class="products-card-link w-inline-block">
 
                         <!-- IMAGEN -->
                         <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c190-f10189a7"
-                            class="products-item-image-wrapper">
+                             class="products-item-image-wrapper">
                             <img class="products-item-image"
-                                src="{{ product.image.url }}"
-                                alt="{{ product.name }}"
-                                loading="lazy">
+                                 src="{{ product.image }}"
+                                 alt="{{ product.name }}"
+                                 loading="lazy">
                         </div>
 
                         <!-- TEXTO -->
@@ -54,7 +59,8 @@
             </div>
         </div>
 
-    </div>
+    </div> <!-- cierre del wrapper Webflow -->
+
 </section>
 
 {% endblock %}

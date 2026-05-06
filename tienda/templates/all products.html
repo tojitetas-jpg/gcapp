@@ -25,11 +25,14 @@
              role="listitem"
              class="collection-item-3 w-dyn-item">
 
-          <!-- Imagen dinámica de la categoría -->
+        {% if cat.image %}
           <img loading="lazy"
-               src="{{ cat.image.url }}"
-               alt="{{ cat.name }}"
-               class="image-5" />
+            src="{{ cat.image.url }}"
+            alt="{{ cat.name }}"
+            class="image-5">
+        {% else %}
+          <div class="image-5 placeholder-circle"></div>
+        {% endif %}
 
           <!-- Link dinámico -->
           <a href="{% url 'category_products' cat.slug %}" class="link">
@@ -47,7 +50,9 @@
 <!-- PRODUCTOS DINÁMICOS -->
 <section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5"
          data-copilot="true"
-         class="section section-black">
+         class="section section-black"
+         style="width: 100%;"        
+         >
 
   <h2 class="heading">Productos</h2>
 
@@ -62,8 +67,7 @@
 
             <div class="products-item-image-wrapper">
               <img class="products-item-image"
-                   src="{{ product.image.url }}"
-                   alt="{{ product.name }}"
+                   src="{{ product.image }}"
                    loading="lazy">
             </div>
 
