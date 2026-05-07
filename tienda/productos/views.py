@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
+from django.shortcuts import render, redirect
+from .models import Product
 
 def products(request):
     products = Product.objects.all()
@@ -26,4 +28,23 @@ def category_products(request, slug):
 
     })
 
-#hola
+def publicar_producto(request):
+    if request.method == "POST":
+        Product.objects.create(
+            name=request.POST.get("title"),
+            price=request.POST.get("price"),
+            description=request.POST.get("description"),
+            details=request.POST.get("details"),
+            image=request.FILES.get("image"),
+            category=Category.objects.get(id=request.POST.get("category")),
+        )
+        return redirect("home")
+
+    categorias = Category.objects.all()
+    return render(request, "publicar_producto.html", {"categories": categorias})
+
+def delete_product(request, id):
+    product = get_object_or_404(Product, id=id)
+    product.delete()
+    return redirect("products")  # te lleva a all-products
+
