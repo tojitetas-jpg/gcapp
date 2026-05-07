@@ -66,9 +66,12 @@
           <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
 
             <div class="products-item-image-wrapper">
+              {% if product.image %}
               <img class="products-item-image"
-                   src="{{ product.image }}"
-                   loading="lazy">
+                src="{{ product.image.url }}"
+                loading="lazy">
+              {% endif %}
+
             </div>
 
             <div class="products-item-text-wrapper">

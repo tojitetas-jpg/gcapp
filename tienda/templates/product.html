@@ -8,17 +8,26 @@
       <!-- 🟦 GALERÍA DEL PRODUCTO -->
       <div class="shop-product-gallery">
         <div class="shop-product-image-wrapper">
-          <img
-            src="{{ product.image.url }}"
-            alt="{{ product.name }}"
-            loading="lazy"
-            class="shop-product-image"
-          />
+          {% if product.image %}
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.name }}"
+              loading="lazy"
+              class="shop-product-image"
+            />
+          {% endif %}
+
         </div>
       </div>
 
       <!-- 🟦 DETALLES DEL PRODUCTO -->
       <div class="shop-product-details">
+           <a href="{% url 'delete_product' product.id %}"
+        class="secondary-button"
+        style="background:#ff4d4d; color:white; margin-top:20px; display:inline-block;"
+        onclick="return confirm('¿Seguro que quieres borrar este producto?');">
+         Borrar producto
+</a>
 
         <div class="shop-product-heading-wrapper">
           <h1 class="heading-h3 heading-h3-product">{{ product.name }}</h1>
@@ -31,6 +40,7 @@
         <p class="paragraph-18">
           {{ product.description }}
         </p>
+     
 
         <!-- 🟦 BOTONES (NO TOCAR, SON DE WEBFLOW) -->
         <div class="add-to-cart">
@@ -135,4 +145,3 @@
 </section>
 
 {% endblock %}
-s

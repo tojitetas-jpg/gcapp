@@ -29,10 +29,14 @@
                         <!-- IMAGEN -->
                         <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c190-f10189a7"
                              class="products-item-image-wrapper">
-                            <img class="products-item-image"
-                                 src="{{ product.image }}"
-                                 alt="{{ product.name }}"
-                                 loading="lazy">
+
+                            {% if product.image and product.image.name %}
+                                <img class="products-item-image"
+                                     src="{{ product.image.url }}"
+                                     alt="{{ product.name }}"
+                                     loading="lazy">
+                            {% endif %}
+
                         </div>
 
                         <!-- TEXTO -->

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="w-layout-grid shop-product-grid">
+
+      <div class="shop-product-gallery">
+        <div class="shop-product-image-wrapper">
+          <label class="form_field-label">Imagen del producto</label>
+          <input type="file" name="image" accept="image/*" required class="form-input" form="publicar-form">
+        </div>
+      </div>
+
+      <div class="shop-product-details">
+
+        <form id="publicar-form" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="shop-product-heading-wrapper">
+            <label class="form_field-label">Título del producto</label>
+            <input type="text" name="title" class="form-input" required>
+
+            <label class="form_field-label">Precio (€)</label>
+            <input type="number" step="0.01" name="price" class="form-input" required>
+          </div>
+
+          <label class="form_field-label">Descripción</label>
+          <textarea name="description" class="form-input" required></textarea>
+
+          <label class="form_field-label">Detalles</label>
+          <textarea name="details" class="form-input"></textarea>
+
+          <label class="form_field-label">Categoría</label>
+          <select name="category" class="form-input" required>
+            {% for cat in categories %}
+              <option value="{{ cat.id }}">{{ cat.name }}</option>
+            {% endfor %}
+          </select>
+
+          <div class="product-page-buttom-wrapper" style="margin-top:20px;">
+            <button type="submit" class="primary-button">Publicar producto</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
