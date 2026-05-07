@@ -25,3 +25,5 @@ def category_products(request, slug):
         'categories': categories
 
     })
+
+#hola
