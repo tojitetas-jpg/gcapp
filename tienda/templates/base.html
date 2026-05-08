@@ -317,17 +317,17 @@
                     <div class="w-commerce-commercecartlist" data-wf-collection="database.commerceOrder.userItems"
                       data-wf-template-id="wf-template-09764160-ecfc-7684-3cba-2e7604b34238">
                       {% for item in cart %}
-    <div style="display:flex; gap:10px; margin-bottom:10px;">
-        <img src="{{ item.product.image.url }}" style="width:60px; height:60px; object-fit:cover;">
-        <div>
-            <div>{{ item.product.name }}</div>
-            <div>{{ item.quantity }} x {{ item.product.price }} €</div>
-            <div><strong>{{ item.total }} €</strong></div>
-        </div>
-    </div>
-{% empty %}
-    <p>Carrito vacío</p>
-{% endfor %}
+                      <div style="display:flex; gap:10px; margin-bottom:10px;">
+                          <img src="{{ item.product.image.url }}" style="width:60px; height:60px; object-fit:cover;">
+                          <div>
+                              <div>{{ item.product.name }}</div>
+                              <div>{{ item.quantity }} x {{ item.product.price }} €</div>
+                              <div><strong>{{ item.total }} €</strong></div>
+                          </div>
+                      </div>
+                     {% empty %}
+                         <p>Carrito vacío</p>
+                      {% endfor %}
 
                     </div>
                     <div class="w-commerce-commercecartfooter">
