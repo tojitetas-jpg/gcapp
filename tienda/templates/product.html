@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
+
+{% block content %}
 <section class="section">
   <div class="w-layout-blockcontainer container w-container">
+
     <div class="w-layout-grid shop-product-grid">
 
       <!-- 🟦 GALERÍA DEL PRODUCTO -->
@@ -16,20 +19,37 @@
               class="shop-product-image"
             />
           {% endif %}
-
         </div>
+
+        {% if product.user %}
+          <p class="product-owner">
+            Publicado por: {{ product.user.username }}
+          </p>
+        {% endif %}
       </div>
 
       <!-- 🟦 DETALLES DEL PRODUCTO -->
       <div class="shop-product-details">
-           <a href="{% url 'delete_product' product.id %}"
-        class="secondary-button"
-        style="background:#ff4d4d; color:white; margin-top:20px; display:inline-block;"
-        onclick="return confirm('¿Seguro que quieres borrar este producto?');">
-         Borrar producto
-</a>
 
-        <div class="shop-product-heading-wrapper">
+        <a href="{% url 'edit_product' product.id %}" class="button w-button">
+          Editar producto
+        </a>
+        <style>
+
+          .delete-button:hover{
+
+            color: #600000 !important;
+          }
+
+        </style>
+        <a href="{% url 'delete_product' product.id %}"
+           class="delete-button"
+           onclick="return confirm('¿Seguro que quieres borrar este producto?');"
+           style="color:red">
+           Borrar producto
+        </a>
+
+        <div class="shop-product-heading-wrapper" style="text-align:center;">
           <h1 class="heading-h3 heading-h3-product">{{ product.name }}</h1>
 
           <div class="heading-h4 h4-product">
@@ -37,10 +57,9 @@
           </div>
         </div>
 
-        <p class="paragraph-18">
+        <p class="paragraph-18" style="text-align:center;">
           {{ product.description }}
         </p>
-     
 
         <!-- 🟦 BOTONES (NO TOCAR, SON DE WEBFLOW) -->
         <div class="add-to-cart">
@@ -56,20 +75,13 @@
           </form>
         </div>
 
-        <!-- 🟦 ACORDEONES (DETALLES, ENVÍO, DEVOLUCIONES) -->
+        <!-- 🟦 ACORDEONES -->
         <div class="shop-product-accordion-wrapper">
 
           <!-- Detalles -->
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
               <div class="paragraph-18 text-weight-semibold">Details</div>
-              <div class="shop-product-accordion-icon">
-                <div class="icon-embed-xsmall w-embed">
-                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
-                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
-                  </svg>
-                </div>
-              </div>
             </div>
 
             <div class="shop-product-accordion-details">
@@ -83,13 +95,6 @@
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
               <div class="paragraph-18 text-weight-semibold">Shipping</div>
-              <div class="shop-product-accordion-icon">
-                <div class="icon-embed-xsmall w-embed">
-                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
-                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
-                  </svg>
-                </div>
-              </div>
             </div>
 
             <div class="shop-product-accordion-details">
@@ -103,13 +108,6 @@
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
               <div class="paragraph-18 text-weight-semibold">Returns</div>
-              <div class="shop-product-accordion-icon">
-                <div class="icon-embed-xsmall w-embed">
-                  <svg width="100%" height="100%" viewBox="0 0 24 25" fill="none">
-                    <path d="M19 12.25V12.75C19 13.0261 18.7764 13.25 18.5003 13.25H12.75V19C12.75 19.2761 12.5264 19.5 12.25 19.5H11.75C11.4741 19.5 11.25 19.2761 11.25 19V13.25H5.5C5.2241 13.25 5 13.0261 5 12.75V12.25C5 11.9739 5.2241 11.75 5.5 11.75H11.25V6C11.25 5.72385 11.4741 5.5 11.75 5.5H12.25C12.5264 5.5 12.75 5.72385 12.75 6V11.75H18.5003C18.7764 11.75 19 11.9739 19 12.25Z" fill="currentColor"/>
-                  </svg>
-                </div>
-              </div>
             </div>
 
             <div class="shop-product-accordion-details">
@@ -134,7 +132,6 @@
       <p class="paragraph-18">These photos exceeded my expectations in every way.</p>
     </div>
 
-    <!-- Slider intacto -->
     <div data-delay="4000" data-animation="slide" class="product-testimonial-slider w-slider">
       <div class="product-testimonial-mask w-slider-mask">
         <!-- Slides originales -->
