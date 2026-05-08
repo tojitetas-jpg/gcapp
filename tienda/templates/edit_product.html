@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="section">
+  <div class="w-layout-blockcontainer container w-container">
+    <div class="w-layout-grid shop-product-grid">
+
+      <!-- 🟦 GALERÍA DEL PRODUCTO -->
+      <div class="shop-product-gallery">
+        <div class="shop-product-image-wrapper">
+          {% if product.image %}
+            <img
+              src="{{ product.image.url }}"
+              alt="{{ product.name }}"
+              loading="lazy"
+              class="shop-product-image"
+            />
+          {% endif %}
+
+          <!-- Cambiar imagen -->
+          <label class="form_field-label" style="margin-top:15px;">Cambiar imagen</label>
+          <input type="file" name="image" form="edit-form" class="form-input">
+        </div>
+      </div>
+
+      <!-- 🟦 DETALLES DEL PRODUCTO -->
+      <div class="shop-product-details">
+
+        <form id="edit-form" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <div class="shop-product-heading-wrapper">
+
+            <!-- Nombre -->
+            <label class="form_field-label">Nombre del producto</label>
+            <input type="text" name="name" value="{{ form.name.value }}" class="form-input">
+
+            <!-- Precio -->
+            <label class="form_field-label" style="margin-top:15px;">Precio (€)</label>
+            <input type="number" step="0.01" name="price" value="{{ form.price.value }}" class="form-input">
+
+          </div>
+
+          <!-- Descripción -->
+          <label class="form_field-label" style="margin-top:20px;">Descripción</label>
+          <textarea name="description" class="form-input" style="height:120px;">{{ form.description.value }}</textarea>
+
+          <!-- Detalles -->
+          <label class="form_field-label" style="margin-top:20px;">Detalles</label>
+          <textarea name="details" class="form-input" style="height:150px;">{{ form.details.value }}</textarea>
+
+          <!-- Categoría -->
+          <label class="form_field-label" style="margin-top:20px;">Categoría</label>
+          {{ form.category }}
+
+          <!-- Botón Guardar -->
+          <div class="product-page-buttom-wrapper" style="margin-top:30px;">
+            <button type="submit" class="primary-button">Guardar cambios</button>
+          </div>
+
+        </form>
+
+        <!-- Botón borrar (igual que antes) -->
+        <a href="{% url 'delete_product' product.id %}"
+          class="secondary-button"
+          style="background:#ff4d4d; color:white; margin-top:20px; display:inline-block;"
+          onclick="return confirm('¿Seguro que quieres borrar este producto?');">
+           Borrar producto
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -5,6 +5,7 @@
   <div class="w-layout-blockcontainer container w-container">
     <div class="w-layout-grid shop-product-grid">
 
+      <!-- IMAGEN DEL PRODUCTO -->
       <div class="shop-product-gallery">
         <div class="shop-product-image-wrapper">
           <label class="form_field-label">Imagen del producto</label>
@@ -12,6 +13,7 @@
         </div>
       </div>
 
+      <!-- FORMULARIO -->
       <div class="shop-product-details">
 
         <form id="publicar-form" action="" method="POST" enctype="multipart/form-data">
@@ -36,6 +38,15 @@
             {% for cat in categories %}
               <option value="{{ cat.id }}">{{ cat.name }}</option>
             {% endfor %}
+          </select>
+
+          <!-- ⭐ NUEVO CAMPO: ESTADO DEL PRODUCTO -->
+          <label class="form_field-label">Estado del producto</label>
+          <select name="condition" class="form-input" required>
+            <option value="usado">Usado</option>
+            <option value="reparado">Reparado</option>
+            <option value="reacondicionado">Reacondicionado</option>
+            <option value="nuevo">Nuevo</option>
           </select>
 
           <div class="product-page-buttom-wrapper" style="margin-top:20px;">

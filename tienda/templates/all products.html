@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 
 <!-- HERO -->
@@ -21,20 +23,17 @@
       <div role="list" class="collection-list-2 w-dyn-items">
 
         {% for cat in categories %}
-        <div id="w-node-_9c4c8cf2-ccaf-3eda-2351-fc2475869962-f10189c3"
-             role="listitem"
-             class="collection-item-3 w-dyn-item">
+        <div class="collection-item-3 w-dyn-item">
 
-        {% if cat.image %}
-          <img loading="lazy"
-            src="{{ cat.image.url }}"
-            alt="{{ cat.name }}"
-            class="image-5">
-        {% else %}
-          <div class="image-5 placeholder-circle"></div>
-        {% endif %}
+          {% if cat.image %}
+            <img loading="lazy"
+              src="{{ cat.image.url }}"
+              alt="{{ cat.name }}"
+              class="image-5">
+          {% else %}
+            <div class="image-5 placeholder-circle"></div>
+          {% endif %}
 
-          <!-- Link dinámico -->
           <a href="{% url 'category_products' cat.slug %}" class="link">
             {{ cat.name }}
           </a>
@@ -47,12 +46,65 @@
   </div>
 </section>
 
+<!-- ⭐⭐⭐ FILTROS ⭐⭐⭐ -->
+<section class="section" style="padding-top: 0;">
+  <div class="w-layout-blockcontainer container w-container">
+
+    <form method="GET" class="filters" style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:30px;">
+
+      <!-- BUSCADOR -->
+      <input type="text"
+             name="search"
+             placeholder="Buscar..."
+             value="{{ request.GET.search }}"
+             class="form-input"
+             style="max-width:200px;">
+
+      <!-- ESTADO -->
+      <select name="condition" class="form-input">
+        <option value="">Estado</option>
+        <option value="usado" {% if request.GET.condition == "usado" %}selected{% endif %}>Usado</option>
+        <option value="reparado" {% if request.GET.condition == "reparado" %}selected{% endif %}>Reparado</option>
+        <option value="reacondicionado" {% if request.GET.condition == "reacondicionado" %}selected{% endif %}>Reacondicionado</option>
+        <option value="nuevo" {% if request.GET.condition == "nuevo" %}selected{% endif %}>Nuevo</option>
+      </select>
+
+      <!-- CATEGORÍA -->
+      <select name="category" class="form-input">
+        <option value="">Categoría</option>
+        {% for cat in categories %}
+          <option value="{{ cat.id }}"
+            {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
+            {{ cat.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <!-- PRECIO MÍNIMO -->
+      <input type="number"
+             name="min_price"
+             placeholder="Precio mínimo"
+             value="{{ request.GET.min_price }}"
+             class="form-input"
+             style="max-width:150px;">
+
+      <!-- PRECIO MÁXIMO -->
+      <input type="number"
+             name="max_price"
+             placeholder="Precio máximo"
+             value="{{ request.GET.max_price }}"
+             class="form-input"
+             style="max-width:150px;">
+
+      <button type="submit" class="primary-button">Filtrar</button>
+
+    </form>
+
+  </div>
+</section>
+
 <!-- PRODUCTOS DINÁMICOS -->
-<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5"
-         data-copilot="true"
-         class="section section-black"
-         style="width: 100%;"        
-         >
+<section class="section section-black" style="width: 100%;">
 
   <h2 class="heading">Productos</h2>
 
@@ -71,7 +123,6 @@
                 src="{{ product.image.url }}"
                 loading="lazy">
               {% endif %}
-
             </div>
 
             <div class="products-item-text-wrapper">
