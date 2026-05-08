@@ -1,0 +1,385 @@
+<div data-node-type="commerce-order-confirmation-wrapper" data-wf-order-query="query Dynamo3($finalizedOrder: CommerceOrderFinalizedOrderArgs) {
+  database {
+    id
+    commerceOrder(finalizedOrder: $finalizedOrder) {
+      availableShippingMethods {
+        description
+        id
+        mode
+        name
+        price {
+          decimalValue
+          string
+          unit
+          value
+        }
+        selected
+      }
+      comment
+      customData {
+        checkbox
+        name
+        textArea
+        textInput
+      }
+      customerInfo {
+        billingAddress {
+          addressee
+          city
+          country
+          japanType
+          line1
+          line2
+          postalCode
+          state
+          type
+        }
+        identity {
+          email
+          fullName
+        }
+        shippingAddress {
+          addressee
+          city
+          country
+          japanType
+          line1
+          line2
+          postalCode
+          state
+          type
+        }
+        stripePayment {
+          card {
+            expires {
+              month
+              year
+            }
+            last4
+            provided
+            provider
+          }
+        }
+      }
+      downloadFiles {
+        id
+        name
+        url
+      }
+      extraItems {
+        name
+        pluginId
+        pluginName
+        price {
+          decimalValue
+          string
+          unit
+          value
+        }
+      }
+      id
+      paymentProcessor
+      startedOn
+      statusFlags {
+        billingAddressRequiresPostalCode
+        hasDownloads
+        hasSubscription
+        isFreeOrder
+        needAddress
+        needIdentity
+        needItems
+        needPayment
+        requiresShipping
+        shippingAddressRequiresPostalCode
+        shouldRecalc
+      }
+      subtotal {
+        decimalValue
+        string
+        unit
+        value
+      }
+      total {
+        decimalValue
+        string
+        unit
+        value
+      }
+      updatedOn
+      userItems {
+        count
+        id
+        product {
+          id
+          cmsLocaleId
+          draft
+          archived
+          f_name_: name
+          f_sku_properties_3dr: skuProperties {
+            id
+            name
+            enum {
+              id
+              name
+              slug
+            }
+          }
+        }
+        rowTotal {
+          decimalValue
+          string
+          unit
+          value
+        }
+        sku {
+          cmsLocaleId
+          draft
+          archived
+          f_main_image_4dr: mainImage {
+            url
+            file {
+              size
+              origFileName
+              createdOn
+              updatedOn
+              mimeType
+              width
+              height
+              variants {
+                origFileName
+                quality
+                height
+                width
+                s3Url
+                error
+                size
+              }
+            }
+            alt
+          }
+          f_sku_values_3dr: skuValues {
+            property {
+              id
+            }
+            value {
+              id
+            }
+          }
+          id
+        }
+        subscriptionFrequency
+        subscriptionInterval
+        subscriptionTrial
+      }
+      userItemsCount
+    }
+  }
+  site {
+    commerce {
+      id
+      businessAddress {
+        country
+      }
+      defaultCountry
+      defaultCurrency
+      quickCheckoutEnabled
+    }
+  }
+}" data-wf-page-link-href-prefix="" class="w-commerce-commerceorderconfirmationcontainer checkout-form">
+    <div class="w-commerce-commercelayoutcontainer w-container">
+        <div class="w-commerce-commercelayoutmain">
+            <div class="w-commerce-commercecheckoutcustomerinfosummarywrapper">
+                <div class="w-commerce-commercecheckoutsummaryblockheader checkout-header">
+                    <h2 class="heading-h4">Customer Information</h2>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent checkout-contents">
+                    <div class="w-commerce-commercecheckoutrow">
+                        <div class="w-commerce-commercecheckoutcolumn">
+                            <div class="w-commerce-commercecheckoutsummaryitem"><label
+                                    class="w-commerce-commercecheckoutsummarylabel paragraph-18 text-weight-semibold">Email</label>
+                                <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.customerEmail%22%7D%7D%5D"
+                                    class="text-block-7"></div>
+                            </div>
+                        </div>
+                        <div data-wf-bindings="%5B%5D"
+                            data-wf-conditions="%7B%22condition%22%3A%7B%22fields%22%3A%7B%22requiresShipping%22%3A%7B%22eq%22%3A%22true%22%2C%22type%22%3A%22Bool%22%7D%7D%7D%2C%22dataPath%22%3A%22database.commerceOrder%22%7D"
+                            class="w-commerce-commercecheckoutcolumn">
+                            <div class="w-commerce-commercecheckoutsummaryitem div-block-10"><label
+                                    class="w-commerce-commercecheckoutsummarylabel paragraph-18 text-weight-semibold">Shipping
+                                    Address</label>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressAddressee%22%7D%7D%5D">
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressLine1%22%7D%7D%5D">
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressLine2%22%7D%7D%5D">
+                                </div>
+                                <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressCity%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressState%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressPostalCode%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingAddressCountry%22%7D%7D%5D">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div data-wf-bindings="%5B%5D"
+                data-wf-conditions="%7B%22condition%22%3A%7B%22fields%22%3A%7B%22requiresShipping%22%3A%7B%22eq%22%3A%22true%22%2C%22type%22%3A%22Bool%22%7D%7D%7D%2C%22dataPath%22%3A%22database.commerceOrder%22%7D"
+                class="w-commerce-commercecheckoutshippingsummarywrapper">
+                <div class="w-commerce-commercecheckoutsummaryblockheader checkout-header">
+                    <h2 class="heading-h4">Shipping Method</h2>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent checkout-contents">
+                    <div class="w-commerce-commercecheckoutrow">
+                        <div class="w-commerce-commercecheckoutcolumn">
+                            <div class="w-commerce-commercecheckoutsummaryitem">
+                                <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingMethodName%22%7D%7D%5D"
+                                    class="text-block-8"></div>
+                                <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.shippingMethodDescription%22%7D%7D%5D"
+                                    class="text-block-9"></div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="w-commerce-commercecheckoutpaymentsummarywrapper">
+                <div class="w-commerce-commercecheckoutsummaryblockheader checkout-header">
+                    <h2 class="heading-h4">Payment Info</h2>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent checkout-contents">
+                    <div class="w-commerce-commercecheckoutrow">
+                        <div class="w-commerce-commercecheckoutcolumn">
+                            <div class="w-commerce-commercecheckoutsummaryitem div-block-11"><label
+                                    class="w-commerce-commercecheckoutsummarylabel paragraph-18 text-weight-semibold">Payment
+                                    Info</label>
+                                <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.cardProvider%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.cardLastFour%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                </div>
+                                <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                                    <div
+                                        data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.cardExpiresMonth%22%7D%7D%5D">
+                                    </div>
+                                    <div data-wf-bindings="%5B%5D"
+                                        data-wf-conditions="%7B%22condition%22%3A%7B%22fields%22%3A%7B%22cardExpiresMonth%22%3A%7B%22exists%22%3A%22yes%22%2C%22type%22%3A%22PlainText%22%7D%7D%7D%2C%22dataPath%22%3A%22database.commerceOrder%22%7D">
+                                        / </div>
+                                    <div
+                                        data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.cardExpiresYear%22%7D%7D%5D">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-commerce-commercecheckoutcolumn">
+                            <div class="w-commerce-commercecheckoutsummaryitem div-block-12"><label
+                                    class="w-commerce-commercecheckoutsummarylabel paragraph-18 text-weight-semibold">Billing
+                                    Address</label>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressAddressee%22%7D%7D%5D">
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressLine1%22%7D%7D%5D">
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressLine2%22%7D%7D%5D">
+                                </div>
+                                <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressCity%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressState%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressPostalCode%22%7D%7D%5D"
+                                        class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                                </div>
+                                <div
+                                    data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.billingAddressCountry%22%7D%7D%5D">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="w-commerce-commercecheckoutorderitemswrapper">
+                <div class="w-commerce-commercecheckoutsummaryblockheader checkout-header">
+                    <h2 class="heading-h4">Items in Order</h2>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent checkout-contents">
+                    <script type="text/x-wf-template"
+                        id="wf-template-66f31432ca4c4ade0f6547fb000000000051">%3Cdiv%20role%3D%22listitem%22%20class%3D%22w-commerce-commercecheckoutorderitem%22%3E%3Cimg%20data-wf-bindings%3D%22%255B%257B%2522src%2522%253A%257B%2522type%2522%253A%2522ImageRef%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.sku.f_main_image_4dr%2522%257D%257D%255D%22%20src%3D%22%22%20alt%3D%22%22%20class%3D%22w-commerce-commercecartitemimage%20w-dyn-bind-empty%22%2F%3E%3Cdiv%20class%3D%22w-commerce-commercecheckoutorderitemdescriptionwrapper%22%3E%3Cdiv%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522PlainText%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_name_%2522%257D%257D%255D%22%20class%3D%22w-commerce-commerceboldtextblock%20heading-h5%20w-dyn-bind-empty%22%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22w-commerce-commercecheckoutorderitemquantitywrapper%22%3E%3Cdiv%20class%3D%22paragraph-18%20a%22%3EQuantity%3A%20%3C%2Fdiv%3E%3Cdiv%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522Number%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522numberPrecision%2522%252C%2522params%2522%253A%255B%25220%2522%252C%2522numberPrecision%2522%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.count%2522%257D%257D%255D%22%20class%3D%22paragraph-18%20a%22%3E1%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cscript%20type%3D%22text%2Fx-wf-template%22%20id%3D%22wf-template-66f31432ca4c4ade0f6547fb00000000005a%22%3E%253Cli%253E%253Cspan%2520data-wf-bindings%253D%2522%25255B%25257B%252522innerHTML%252522%25253A%25257B%252522type%252522%25253A%252522PlainText%252522%25252C%252522filter%252522%25253A%25257B%252522type%252522%25253A%252522identity%252522%25252C%252522params%252522%25253A%25255B%25255D%25257D%25252C%252522dataPath%252522%25253A%252522database.commerceOrder.userItems%25255B%25255D.product.f_sku_properties_3dr%25255B%25255D.name%252522%25257D%25257D%25255D%2522%2520class%253D%2522w-dyn-bind-empty%2522%253E%253C%252Fspan%253E%253Cspan%253E%253A%2520%253C%252Fspan%253E%253Cspan%2520data-wf-bindings%253D%2522%25255B%25257B%252522innerHTML%252522%25253A%25257B%252522type%252522%25253A%252522CommercePropValues%252522%25252C%252522filter%252522%25253A%25257B%252522type%252522%25253A%252522identity%252522%25252C%252522params%252522%25253A%25255B%25255D%25257D%25252C%252522dataPath%252522%25253A%252522database.commerceOrder.userItems%25255B%25255D.product.f_sku_properties_3dr%25255B%25255D%252522%25257D%25257D%25255D%2522%2520class%253D%2522w-dyn-bind-empty%2522%253E%253C%252Fspan%253E%253C%252Fli%253E%3C%2Fscript%3E%3Cul%20data-wf-bindings%3D%22%255B%257B%2522optionSets%2522%253A%257B%2522type%2522%253A%2522CommercePropTable%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%5B%5D%2522%257D%257D%252C%257B%2522optionValues%2522%253A%257B%2522type%2522%253A%2522CommercePropValues%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.sku.f_sku_values_3dr%2522%257D%257D%255D%22%20class%3D%22w-commerce-commercecheckoutorderitemoptionlist%22%20data-wf-collection%3D%22database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%22%20data-wf-template-id%3D%22wf-template-66f31432ca4c4ade0f6547fb00000000005a%22%3E%3Cli%3E%3Cspan%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522PlainText%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%255B%255D.name%2522%257D%257D%255D%22%20class%3D%22w-dyn-bind-empty%22%3E%3C%2Fspan%3E%3Cspan%3E%3A%20%3C%2Fspan%3E%3Cspan%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522CommercePropValues%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%255B%255D%2522%257D%257D%255D%22%20class%3D%22w-dyn-bind-empty%22%3E%3C%2Fspan%3E%3C%2Fli%3E%3C%2Ful%3E%3C%2Fdiv%3E%3Cdiv%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522CommercePrice%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522price%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.rowTotal%2522%257D%257D%255D%22%20class%3D%22paragraph-18%20b%22%3E%24%C2%A00.00%C2%A0USD%3C%2Fdiv%3E%3C%2Fdiv%3E</script>
+                    <div role="list" class="w-commerce-commercecheckoutorderitemslist"
+                        data-wf-collection="database.commerceOrder.userItems"
+                        data-wf-template-id="wf-template-66f31432ca4c4ade0f6547fb000000000051">
+                        <div role="listitem" class="w-commerce-commercecheckoutorderitem"><img
+                                data-wf-bindings="%5B%7B%22src%22%3A%7B%22type%22%3A%22ImageRef%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.sku.f_main_image_4dr%22%7D%7D%5D"
+                                src="" alt="" class="w-commerce-commercecartitemimage w-dyn-bind-empty" />
+                            <div class="w-commerce-commercecheckoutorderitemdescriptionwrapper">
+                                <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.product.f_name_%22%7D%7D%5D"
+                                    class="w-commerce-commerceboldtextblock heading-h5 w-dyn-bind-empty"></div>
+                                <div class="w-commerce-commercecheckoutorderitemquantitywrapper">
+                                    <div class="paragraph-18 a">Quantity: </div>
+                                    <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22Number%22%2C%22filter%22%3A%7B%22type%22%3A%22numberPrecision%22%2C%22params%22%3A%5B%220%22%2C%22numberPrecision%22%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.count%22%7D%7D%5D"
+                                        class="paragraph-18 a">1</div>
+                                </div>
+                                <script type="text/x-wf-template"
+                                    id="wf-template-66f31432ca4c4ade0f6547fb00000000005a">%3Cli%3E%3Cspan%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522PlainText%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%255B%255D.name%2522%257D%257D%255D%22%20class%3D%22w-dyn-bind-empty%22%3E%3C%2Fspan%3E%3Cspan%3E%3A%20%3C%2Fspan%3E%3Cspan%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522CommercePropValues%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.userItems%255B%255D.product.f_sku_properties_3dr%255B%255D%2522%257D%257D%255D%22%20class%3D%22w-dyn-bind-empty%22%3E%3C%2Fspan%3E%3C%2Fli%3E</script>
+                                <ul data-wf-bindings="%5B%7B%22optionSets%22%3A%7B%22type%22%3A%22CommercePropTable%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.product.f_sku_properties_3dr[]%22%7D%7D%2C%7B%22optionValues%22%3A%7B%22type%22%3A%22CommercePropValues%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.sku.f_sku_values_3dr%22%7D%7D%5D"
+                                    class="w-commerce-commercecheckoutorderitemoptionlist"
+                                    data-wf-collection="database.commerceOrder.userItems%5B%5D.product.f_sku_properties_3dr"
+                                    data-wf-template-id="wf-template-66f31432ca4c4ade0f6547fb00000000005a">
+                                    <li><span
+                                            data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.product.f_sku_properties_3dr%5B%5D.name%22%7D%7D%5D"
+                                            class="w-dyn-bind-empty"></span><span>: </span><span
+                                            data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22CommercePropValues%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.product.f_sku_properties_3dr%5B%5D%22%7D%7D%5D"
+                                            class="w-dyn-bind-empty"></span></li>
+                                </ul>
+                            </div>
+                            <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22CommercePrice%22%2C%22filter%22%3A%7B%22type%22%3A%22price%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.userItems%5B%5D.rowTotal%22%7D%7D%5D"
+                                class="paragraph-18 b">$ 0.00 USD</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="w-commerce-commercelayoutsidebar">
+            <div class="w-commerce-commercecheckoutordersummarywrapper">
+                <div class="w-commerce-commercecheckoutsummaryblockheader checkout-header">
+                    <h2 class="heading-h4">Order Summary</h2>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent checkout-contents">
+                    <div class="w-commerce-commercecheckoutsummarylineitem">
+                        <div class="paragraph-18 c">Subtotal</div>
+                        <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22CommercePrice%22%2C%22filter%22%3A%7B%22type%22%3A%22price%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.subtotal%22%7D%7D%5D"
+                            class="paragraph-18 d"></div>
+                    </div>
+                    <script type="text/x-wf-template"
+                        id="wf-template-66f31432ca4c4ade0f6547fb00000000006b">%3Cdiv%20class%3D%22w-commerce-commercecheckoutordersummaryextraitemslistitem%22%3E%3Cdiv%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522PlainText%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522identity%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.extraItems%255B%255D.name%2522%257D%257D%255D%22%20class%3D%22paragraph-18%20c%20w-dyn-bind-empty%22%3E%3C%2Fdiv%3E%3Cdiv%20data-wf-bindings%3D%22%255B%257B%2522innerHTML%2522%253A%257B%2522type%2522%253A%2522CommercePrice%2522%252C%2522filter%2522%253A%257B%2522type%2522%253A%2522price%2522%252C%2522params%2522%253A%255B%255D%257D%252C%2522dataPath%2522%253A%2522database.commerceOrder.extraItems%255B%255D.price%2522%257D%257D%255D%22%20class%3D%22paragraph-18%20d%22%3E%24%C2%A00.00%C2%A0USD%3C%2Fdiv%3E%3C%2Fdiv%3E</script>
+                    <div class="w-commerce-commercecheckoutordersummaryextraitemslist"
+                        data-wf-collection="database.commerceOrder.extraItems"
+                        data-wf-template-id="wf-template-66f31432ca4c4ade0f6547fb00000000006b">
+                        <div class="w-commerce-commercecheckoutordersummaryextraitemslistitem">
+                            <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22PlainText%22%2C%22filter%22%3A%7B%22type%22%3A%22identity%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.extraItems%5B%5D.name%22%7D%7D%5D"
+                                class="paragraph-18 c w-dyn-bind-empty"></div>
+                            <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22CommercePrice%22%2C%22filter%22%3A%7B%22type%22%3A%22price%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.extraItems%5B%5D.price%22%7D%7D%5D"
+                                class="paragraph-18 d">$ 0.00 USD</div>
+                        </div>
+                    </div>
+                    <div class="w-commerce-commercecheckoutsummarylineitem">
+                        <div class="paragraph-18 c">Total</div>
+                        <div data-wf-bindings="%5B%7B%22innerHTML%22%3A%7B%22type%22%3A%22CommercePrice%22%2C%22filter%22%3A%7B%22type%22%3A%22price%22%2C%22params%22%3A%5B%5D%7D%2C%22dataPath%22%3A%22database.commerceOrder.total%22%7D%7D%5D"
+                            class="w-commerce-commercecheckoutsummarytotal paragraph-18 d"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
