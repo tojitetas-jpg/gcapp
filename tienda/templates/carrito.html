@@ -1,0 +1,9 @@
+<h2>Carrito</h2>
+
+{% for item in cart %}
+  <p>{{ item.product.name }} x {{ item.quantity }} = {{ item.total }} €</p>
+{% empty %}
+  <p>Carrito vacío</p>
+{% endfor %}
+
+<p>Total: {{ cart.get_total }} €</p>
