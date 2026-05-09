@@ -46,11 +46,28 @@
   </div>
 </section>
 
-<!-- ⭐⭐⭐ FILTROS ⭐⭐⭐ -->
-<section class="section" style="padding-top: 0;">
+<!-- ⭐⭐⭐ SECCIÓN DE PRODUCTOS ⭐⭐⭐ -->
+<section id="productos" class="section section-black" style="width: 100%;">
+
+  <!-- TÍTULO -->
+  <h2 class="heading" style="margin-bottom: 30px;">Productos</h2>
+
+  <!-- ⭐⭐⭐ FILTROS BONITOS ⭐⭐⭐ -->
   <div class="w-layout-blockcontainer container w-container">
 
-    <form method="GET" class="filters" style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:30px;">
+    <form method="GET"
+      action="{% url 'products' %}#productos"
+      class="filters"
+      style="
+        display:flex;
+        gap:15px;
+        flex-wrap:wrap;
+        margin-bottom:40px;
+        background:rgba(255,255,255,0.08);
+        padding:20px;
+        border-radius:12px;
+        backdrop-filter:blur(6px);
+      ">
 
       <!-- BUSCADOR -->
       <input type="text"
@@ -58,10 +75,25 @@
              placeholder="Buscar..."
              value="{{ request.GET.search }}"
              class="form-input"
-             style="max-width:200px;">
+             style="
+               padding:10px 14px;
+               border-radius:8px;
+               border:1px solid rgba(255,255,255,0.4);
+               background:rgba(255,255,255,0.12);
+               color:white;
+               min-width:180px;
+             ">
 
       <!-- ESTADO -->
-      <select name="condition" class="form-input">
+      <select name="condition" class="form-input"
+              style="
+                padding:10px 14px;
+                border-radius:8px;
+                border:1px solid rgba(255,255,255,0.4);
+                background:rgba(255,255,255,0.12);
+                color:white;
+                min-width:150px;
+              ">
         <option value="">Estado</option>
         <option value="usado" {% if request.GET.condition == "usado" %}selected{% endif %}>Usado</option>
         <option value="reparado" {% if request.GET.condition == "reparado" %}selected{% endif %}>Reparado</option>
@@ -70,7 +102,15 @@
       </select>
 
       <!-- CATEGORÍA -->
-      <select name="category" class="form-input">
+      <select name="category" class="form-input"
+              style="
+                padding:10px 14px;
+                border-radius:8px;
+                border:1px solid rgba(255,255,255,0.4);
+                background:rgba(255,255,255,0.12);
+                color:white;
+                min-width:150px;
+              ">
         <option value="">Categoría</option>
         {% for cat in categories %}
           <option value="{{ cat.id }}"
@@ -86,7 +126,14 @@
              placeholder="Precio mínimo"
              value="{{ request.GET.min_price }}"
              class="form-input"
-             style="max-width:150px;">
+             style="
+               padding:10px 14px;
+               border-radius:8px;
+               border:1px solid rgba(255,255,255,0.4);
+               background:rgba(255,255,255,0.12);
+               color:white;
+               min-width:150px;
+             ">
 
       <!-- PRECIO MÁXIMO -->
       <input type="number"
@@ -94,20 +141,34 @@
              placeholder="Precio máximo"
              value="{{ request.GET.max_price }}"
              class="form-input"
-             style="max-width:150px;">
+             style="
+               padding:10px 14px;
+               border-radius:8px;
+               border:1px solid rgba(255,255,255,0.4);
+               background:rgba(255,255,255,0.12);
+               color:white;
+               min-width:150px;
+             ">
 
-      <button type="submit" class="primary-button">Filtrar</button>
+      <!-- BOTÓN -->
+      <button type="submit"
+              class="primary-button"
+              style="
+                padding:10px 20px;
+                border-radius:8px;
+                background:#4a7cff;
+                color:white;
+                border:none;
+                font-weight:600;
+              ">
+        Filtrar
+      </button>
 
     </form>
 
   </div>
-</section>
 
-<!-- PRODUCTOS DINÁMICOS -->
-<section class="section section-black" style="width: 100%;">
-
-  <h2 class="heading">Productos</h2>
-
+  <!-- GRID DE PRODUCTOS -->
   <div class="container">
     <div class="collection-list-wrapper-8 w-dyn-list">
       <div role="list" class="all-products-grid w-dyn-items">
@@ -149,6 +210,7 @@
       </div>
     </div>
   </div>
+
 </section>
 
 {% endblock %}

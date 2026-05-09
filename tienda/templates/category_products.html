@@ -1,42 +1,131 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section data-record-id="470fcc13-0b0c-86fa-3f31-5be4b871ebe5"
-         data-copilot="true"
-         class="section section-black-product">
+<section class="section section-black-product">
 
-    <!-- WRAPPER WEBFLOW QUE FALTABA -->
     <div class="w-layout-blockcontainer container w-container">
 
         <!-- TÍTULO DE LA CATEGORÍA -->
-        <div class="max-60rem-title-wrapper">
-            <p class="hero-label hero-label-white">Category</p>
+        <div class="max-60rem-title-wrapper" style="margin-bottom: 40px;">
+            <p class="hero-label hero-label-white">Categoría</p>
             <h1 class="display-heading-1 display-heading-1-white">{{ category.name }}</h1>
         </div>
 
-        <!-- LISTA DE PRODUCTOS -->
+        <!-- ⭐⭐⭐ FILTROS BONITOS ⭐⭐⭐ -->
+        <form method="GET"
+              action="#productos"
+              class="filters"
+              style="
+                display:flex;
+                gap:15px;
+                flex-wrap:wrap;
+                margin-bottom:40px;
+                background:rgba(255,255,255,0.08);
+                padding:20px;
+                border-radius:12px;
+                backdrop-filter:blur(6px);
+              ">
+
+            <!-- BUSCADOR -->
+            <input type="text"
+                   name="search"
+                   placeholder="Buscar..."
+                   value="{{ request.GET.search }}"
+                   class="form-input"
+                   style="
+                     padding:10px 14px;
+                     border-radius:8px;
+                     border:1px solid rgba(255,255,255,0.4);
+                     background:rgba(255,255,255,0.12);
+                     color:white;
+                     min-width:180px;
+                   ">
+
+            <!-- ESTADO -->
+            <select name="condition"
+                    onchange="this.form.submit()"
+                    class="form-input"
+                    style="
+                      padding:10px 14px;
+                      border-radius:8px;
+                      border:1px solid rgba(255,255,255,0.4);
+                      background:rgba(255,255,255,0.12);
+                      color:white;
+                      min-width:150px;
+                    ">
+              <option value="">Estado</option>
+              <option value="usado" {% if request.GET.condition == "usado" %}selected{% endif %}>Usado</option>
+              <option value="reparado" {% if request.GET.condition == "reparado" %}selected{% endif %}>Reparado</option>
+              <option value="reacondicionado" {% if request.GET.condition == "reacondicionado" %}selected{% endif %}>Reacondicionado</option>
+              <option value="nuevo" {% if request.GET.condition == "nuevo" %}selected{% endif %}>Nuevo</option>
+            </select>
+
+            <!-- PRECIO MÍNIMO -->
+            <input type="number"
+                   name="min_price"
+                   placeholder="Precio mínimo"
+                   value="{{ request.GET.min_price }}"
+                   class="form-input"
+                   style="
+                     padding:10px 14px;
+                     border-radius:8px;
+                     border:1px solid rgba(255,255,255,0.4);
+                     background:rgba(255,255,255,0.12);
+                     color:white;
+                     min-width:150px;
+                   ">
+
+            <!-- PRECIO MÁXIMO -->
+            <input type="number"
+                   name="max_price"
+                   placeholder="Precio máximo"
+                   value="{{ request.GET.max_price }}"
+                   class="form-input"
+                   style="
+                     padding:10px 14px;
+                     border-radius:8px;
+                     border:1px solid rgba(255,255,255,0.4);
+                     background:rgba(255,255,255,0.12);
+                     color:white;
+                     min-width:150px;
+                   ">
+
+            <!-- BOTÓN -->
+            <button type="submit"
+                    class="primary-button"
+                    style="
+                      padding:10px 20px;
+                      border-radius:8px;
+                      background:#4a7cff;
+                      color:white;
+                      border:none;
+                      font-weight:600;
+                    ">
+              Filtrar
+            </button>
+
+        </form>
+
+        <!-- ⭐⭐⭐ LISTA DE PRODUCTOS ⭐⭐⭐ -->
+        <section id="productos"></section>
+
         <div class="w-dyn-list">
             <div role="list" class="products-grid w-dyn-items">
 
                 {% for product in products %}
-                <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c18e-f10189a7"
-                     role="listitem"
-                     class="collection-item-5 w-dyn-item">
+                <div class="collection-item-5 w-dyn-item">
 
                     <a href="{% url 'product' product.id %}"
                        class="products-card-link w-inline-block">
 
                         <!-- IMAGEN -->
-                        <div id="w-node-_462eb554-0972-cb1c-337e-7da56907c190-f10189a7"
-                             class="products-item-image-wrapper">
-
+                        <div class="products-item-image-wrapper">
                             {% if product.image and product.image.name %}
                                 <img class="products-item-image"
                                      src="{{ product.image.url }}"
                                      alt="{{ product.name }}"
                                      loading="lazy">
                             {% endif %}
-
                         </div>
 
                         <!-- TEXTO -->
@@ -63,7 +152,7 @@
             </div>
         </div>
 
-    </div> <!-- cierre del wrapper Webflow -->
+    </div>
 
 </section>
 
