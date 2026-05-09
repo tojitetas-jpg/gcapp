@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product
-from django.shortcuts import render, redirect
-from .models import Product
 from .forms import ProductForm
+from django.db.models import Q
 
 
 def products(request):
     products = Product.objects.all()
     categories = Category.objects.all()
+
     # Obtener filtros desde la URL
     search = request.GET.get("search")
     condition = request.GET.get("condition")
@@ -29,13 +29,19 @@ def products(request):
 
     # FILTRO POR PRECIO MÍNIMO
     if min_price:
-        products = products.filter(price__gte=min_price)
+     products = products.filter(price__gte=min_price)
 
     # FILTRO POR PRECIO MÁXIMO
+    if max_price:
         products = products.filter(price__lte=max_price)
 
+
     
+<<<<<<< HEAD
     return render(request, "all_products.html", {
+=======
+    return render(request, "all-products.html", {
+>>>>>>> 34af528c4738d6320df89bc10a4702eb6f2c7a18
         "products": products,
         "categories": categories
     })
@@ -44,18 +50,37 @@ def product(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, "product.html", {"product": product})
 
+
+
 def category_products(request, slug):
-    category = get_object_or_404(Category, slug=slug)
+    category = Category.objects.get(slug=slug)
     products = Product.objects.filter(category=category)
-    categories = Category.objects.all()
 
-    return render(request, 'category_products.html', {
+    search = request.GET.get("search") or ""
+    condition = request.GET.get("condition") or ""
+    min_price = request.GET.get("min_price") or ""
+    max_price = request.GET.get("max_price") or ""
 
-        'category': category,
-        'products': products,
-        'categories': categories
+    if search:
+        products = products.filter(
+            Q(name__icontains=search) |
+            Q(description__icontains=search)
+        )
 
+    if condition:
+        products = products.filter(condition=condition)
+
+    if min_price:
+        products = products.filter(price__gte=min_price)
+
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    return render(request, "category_products.html", {
+        "category": category,
+        "products": products,
     })
+
 
 def publicar_producto(request):
     if request.method == "POST":

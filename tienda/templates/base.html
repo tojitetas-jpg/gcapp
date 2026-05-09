@@ -99,7 +99,6 @@
         class="nav-logo w-inline-block w--current">
         <div class="text-block-2">GCapp</div>
       </a>
-
 <style>
 .category-block {
     transition: transform 0.35s ease, filter 0.35s ease;
@@ -125,7 +124,7 @@
 
                 <!-- ALL PRODUCTS -->
                 <a id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a79-fe651a75"
-                   href="/all-products"
+                   href="{% url 'products' %}"
                    class="link-block-2 w-inline-block">
                     <div class="text-block-5">All Products</div>
                 </a>
@@ -151,12 +150,13 @@
                                    overflow:hidden;
                                    background-size:cover;
                                    background-position:center;
-                                   background-repeat:no-repeat;"
-                              {% if cat.image and cat.image.name %}
-                                       style="background-image:url('{{ cat.image.url }}');"
-                              {% else %}
-                                       style="background-color:#222;"
-                              {% endif %}>
+                                   background-repeat:no-repeat;
+                                   {% if cat.image and cat.image.name %}
+                                       background-image:url('{{ cat.image.url }}');
+                                   {% else %}
+                                       background-color:#222;
+                                   {% endif %}
+                               ">
 
                                 <div style="
                                     position:absolute;
@@ -194,6 +194,7 @@
 
 </nav>
 
+<<<<<<< HEAD
       <div class="nav-menu-button w-nav-button">
         <div class="navha-hamburger-button w-hidden-main"><img
             src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69bfd32f6843e2faf10188d2_Hamburger%20icon.svg"
@@ -213,6 +214,23 @@
           <div>Oops! Something went wrong while submitting the form.</div>
         </div>
       </div>
+=======
+<!-- 🔥 ESTA ES LA ÚNICA BARRA DE BÚSQUEDA QUE QUEDA (WEBFLOW) -->
+<div id="w-node-d2739a7b-7fc7-fdc1-0fbb-7f117846a3a3-fe651a75" class="form-block-2 w-form">
+      <form action="{% url 'products' %}#productos" method="get">
+        <input
+            class="text-field-2 w-input"
+            maxlength="256"
+            name="search"
+            placeholder="Buscar..."
+            type="text"
+            id="search"
+            value="{{ request.GET.search }}"
+        />
+    </form>
+</div>
+
+>>>>>>> 34af528c4738d6320df89bc10a4702eb6f2c7a18
       <div class="w-layout-blockcontainer container-3 w-container"><a href="/publicar/" class="nav-link">Publicar producto</a>
         <a href="/contact" class="nav-link contact">Contact</a>
         <div class="card-wrapper">

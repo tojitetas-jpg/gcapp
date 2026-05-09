@@ -23,7 +23,7 @@ urlpatterns = [
     path("services/", core_views.services, name="services"),
     
     # Productos
-    path("all-products/", product_views.products, name="products"),
+    path("all products/", product_views.products, name="products"),
     path("product/<int:id>/", product_views.product, name="product"),
     path("product/<int:id>/delete/", product_views.delete_product, name="delete_product"),
     path('edit/<int:id>/', product_views.edit_product, name='edit_product'),
