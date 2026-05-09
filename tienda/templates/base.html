@@ -77,7 +77,7 @@
 
     {% if request.user.is_authenticated %}
 
-        <a href="#" class="link-2">perfil</a>
+        <a href="{% url 'profile' %}" class="link-2 w-inline-block">perfil</a>
         <a href="#" class="link-2">ajustes</a>
         <a href="{% url 'logout' %}" class="link-2">cerrar sesion</a>
 
