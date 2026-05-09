@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+
+        <h1>Carrito</h1>
+
+        {% if cart %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.product.price }} €</td>
+                        <td>{{ item.total }} €</td>
+                        <td>
+                            <a href="{% url 'remove_from_cart' item.product.id %}" class="btn">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Total: {{ cart.get_total }} €</h3>
+
+            <a href="{% url 'checkout' %}" class="btn btn-primary">Ir al checkout</a>
+
+        {% else %}
+            <p>Tu carrito está vacío.</p>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}
