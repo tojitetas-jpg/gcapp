@@ -6,7 +6,7 @@
 <div class="checkout-container" style="max-width: 900px; margin: 40px auto; display: flex; gap: 40px;">
 
     <!-- COLUMNA IZQUIERDA: PRODUCTOS -->
-    <div style="flex: 1; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <div style="flex: 1; background: #0a1e69; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         <h2 style="margin-bottom: 20px;">🛒 Tu carrito</h2>
 
         {% if cart %}
@@ -14,9 +14,15 @@
                 <div style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
                     
                     <!-- Imagen del producto -->
-                    <img src="{{ item.product.imagen.url }}" 
-                         alt="{{ item.product.nombre }}" 
-                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
+                    {% if item.product.image %}
+                     <img src="{{ item.product.image.url }}" 
+                         alt="{{ item.product.name }}"
+                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
+                    {% else %}
+                    <div style="width: 80px; height: 80px; background: #eee; border-radius: 8px; margin-right: 15px; display:flex; align-items:center; justify-content:center; color:#777;">
+                        Sin imagen
+                    </div>
+                    {% endif %}
 
                     <!-- Info del producto -->
                     <div style="flex: 1;">
