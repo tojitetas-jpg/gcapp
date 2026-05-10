@@ -63,17 +63,18 @@
 
         <!-- 🟦 BOTONES (NO TOCAR, SON DE WEBFLOW) -->
         <div class="add-to-cart">
-          <form class="w-commerce-commerceaddtocartform">
-            <label class="form_field-label">Quantity</label>
-            <input type="number" min="1" value="1"
-              class="w-commerce-commerceaddtocartquantityinput form-input quantity-input" />
+          <label class="form_field-label">Quantity</label>
+          <input type="number" min="1" value="1" class="form-input quantity-input" disabled />
 
-            <div class="product-page-buttom-wrapper">
-              <input type="submit" class="w-commerce-commerceaddtocartbutton primary-button" value="Add to Cart" />
-              <a class="w-commerce-commercebuynowbutton secondary-button" href="/checkout">Buy now</a>
-            </div>
-          </form>
+          <div class="product-page-button-wrapper">
+            <a href="{% url 'add_to_cart' product.id %}" class="primary-button">
+            Add to Cart
+            </a>
+
+           
+          </div>
         </div>
+
 
         <!-- 🟦 ACORDEONES -->
         <div class="shop-product-accordion-wrapper">
