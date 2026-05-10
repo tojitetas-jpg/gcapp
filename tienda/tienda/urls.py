@@ -8,7 +8,6 @@ from django.conf.urls.static import static
 from core import views as core_views
 from usuarios import views as user_views
 from productos import views as product_views
-from pedidos import views as order_views
 
 urlpatterns = [
 
@@ -29,21 +28,13 @@ urlpatterns = [
     path('categorias/<slug:slug>/', product_views.category_products, name='category_products'),
     path("publicar/", product_views.publicar_producto, name="publicar_producto"),
    
-
     # Usuarios
     path("login/", user_views.login_view, name="login"),
     path("register/", user_views.register_view, name="register"),
     path("logout/", LogoutView.as_view(), name="logout"),
 
-    # Pedidos
+    # Pedidos (AQUÍ VAN TODAS LAS RUTAS DE PEDIDOS)
     path("", include("pedidos.urls")),
-
-    # checkout
-    path("checkout/", order_views.checkout, name="checkout"),
-    path("realizar-pedido/", order_views.place_order, name="place_order"),
-    path("mis-pedidos/", order_views.mis_pedidos, name="mis_pedidos"),
-
-
 ]
 
 # imagenes categorias
