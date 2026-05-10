@@ -9,7 +9,6 @@ def add_to_cart(request, product_id):
     cart.add(product)
     return redirect(request.META.get("HTTP_REFERER", "/"))
 
-
 def ver_carrito(request):
     cart = Cart(request)
     return render(request, "carrito.html", {"cart": cart})
@@ -20,12 +19,10 @@ def remove_from_cart(request, product_id):
     cart.remove(product)
     return redirect(request.META.get("HTTP_REFERER", "/"))
 
-
 def checkout(request):
     cart = Cart(request)
 
     if request.method == "POST":
-        # Guardar datos del formulario en la sesión
         request.session["checkout_data"] = {
             "full_name": request.POST.get("full_name"),
             "email": request.POST.get("email"),
@@ -44,9 +41,7 @@ def order_confirmation(request):
     if not checkout_data:
         return redirect("checkout")
 
-    # Si el usuario confirma el pedido
     if request.method == "POST":
-        # Crear pedido
         order = Order.objects.create(
             user=request.user if request.user.is_authenticated else None,
             full_name=checkout_data["full_name"],
@@ -57,7 +52,6 @@ def order_confirmation(request):
             total=cart.get_total(),
         )
 
-        # Guardar productos
         for item in cart:
             OrderItem.objects.create(
                 order=order,
@@ -66,27 +60,20 @@ def order_confirmation(request):
                 price=item["product"].price,
             )
 
-        # Vaciar carrito
         cart.clear()
-
-        # Borrar datos del checkout
         del request.session["checkout_data"]
 
-        # Mostrar pantalla de compra completada (MISMA PANTALLA)
         return render(request, "order_confirmation.html", {
             "order_completed": True,
             "order": order,
         })
 
-    # Primera vez que se entra a order_confirmation
     return render(request, "order_confirmation.html", {
         "order_completed": False,
         "order": checkout_data,
         "cart": cart,
         "cart_total": cart.get_total(),
     })
-
-    
 
 def mis_pedidos(request):
     pedidos = Order.objects.filter(user=request.user)
