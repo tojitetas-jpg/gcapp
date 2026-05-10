@@ -38,6 +38,14 @@ urlpatterns = [
     # Pedidos
     path("", include("pedidos.urls")),
 
+    # checkout
+    path("checkout/", order_views.checkout, name="checkout"),
+    path("confirmacion/", order_views.order_confirmation, name="order_confirmation"),
+    path("realizar-pedido/", order_views.place_order, name="place_order"),
+    path("pedido-completado/<int:order_id>/", order_views.order_complete, name="order_complete"),
+    path("mis-pedidos/", order_views.mis_pedidos, name="mis_pedidos"),
+
+
 ]
 
 # imagenes categorias
