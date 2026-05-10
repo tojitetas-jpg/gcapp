@@ -51,7 +51,7 @@
         <div style="flex: 1; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.2);">
             <h2 style="margin-bottom: 20px;">🧾 Datos de envío</h2>
 
-            <form method="POST" action="{% url 'order_confirmation' %}">
+            <form method="POST" action="{% url 'checkout' %}">
                 {% csrf_token %}
 
                 <label>Nombre completo</label>
