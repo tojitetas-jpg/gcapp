@@ -44,7 +44,43 @@ def order_confirmation(request):
     if not checkout_data:
         return redirect("checkout")
 
+    # Si el usuario confirma el pedido
+    if request.method == "POST":
+        # Crear pedido
+        order = Order.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            full_name=checkout_data["full_name"],
+            email=checkout_data["email"],
+            address=checkout_data["address"],
+            city=checkout_data["city"],
+            postal_code=checkout_data["postal_code"],
+            total=cart.get_total(),
+        )
+
+        # Guardar productos
+        for item in cart:
+            OrderItem.objects.create(
+                order=order,
+                product=item["product"],
+                quantity=item["quantity"],
+                price=item["product"].price,
+            )
+
+        # Vaciar carrito
+        cart.clear()
+
+        # Borrar datos del checkout
+        del request.session["checkout_data"]
+
+        # Mostrar pantalla de compra completada (MISMA PANTALLA)
+        return render(request, "order_confirmation.html", {
+            "order_completed": True,
+            "order": order,
+        })
+
+    # Primera vez que se entra a order_confirmation
     return render(request, "order_confirmation.html", {
+        "order_completed": False,
         "order": checkout_data,
         "cart": cart,
         "cart_total": cart.get_total(),
@@ -55,41 +91,3 @@ def order_confirmation(request):
 def mis_pedidos(request):
     pedidos = Order.objects.filter(user=request.user)
     return render(request, "mis_pedidos.html", {"pedidos": pedidos})
-
-def place_order(request):
-    cart = Cart(request)
-    checkout_data = request.session.get("checkout_data")
-
-    if not checkout_data:
-        return redirect("checkout")
-
-    # Crear pedido
-    order = Order.objects.create(
-        user=request.user if request.user.is_authenticated else None,
-        full_name=checkout_data["full_name"],
-        email=checkout_data["email"],
-        address=checkout_data["address"],
-        city=checkout_data["city"],
-        postal_code=checkout_data["postal_code"],
-        total=cart.get_total(),
-    )
-
-    # Crear ítems del pedido
-    for item in cart:
-        OrderItem.objects.create(
-            order=order,
-            product=item["product"],
-            quantity=item["quantity"],
-            price=item["product"].price,
-        )
-
-    cart.clear()
-    del request.session["checkout_data"]
-
-    return redirect("order_complete", order_id=order.id)
-
-
-def order_complete(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    return render(request, "order_complete.html", {"order": order})
-
