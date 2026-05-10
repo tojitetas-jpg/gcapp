@@ -3,76 +3,79 @@
 
 {% block content %}
 
-<div class="checkout-container" style="max-width: 900px; margin: 40px auto; display: flex; gap: 40px;">
+<!-- FONDO AZUL -->
+<div style="background:#0a2540; padding:40px 0; min-height:100vh;">
 
-    <!-- COLUMNA IZQUIERDA: PRODUCTOS -->
-    <div style="flex: 1; background: #0a1e69; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <h2 style="margin-bottom: 20px;">🛒 Tu carrito</h2>
+    <div style="max-width: 1000px; margin: 0 auto; display: flex; gap: 40px;">
 
-        {% if cart %}
-            {% for item in cart %}
-                <div style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
-                    
-                    <!-- Imagen del producto -->
-                    {% if item.product.image %}
-                     <img src="{{ item.product.image.url }}" 
-                         alt="{{ item.product.name }}"
-                        style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
-                    {% else %}
-                    <div style="width: 80px; height: 80px; background: #eee; border-radius: 8px; margin-right: 15px; display:flex; align-items:center; justify-content:center; color:#777;">
-                        Sin imagen
+        <!-- COLUMNA IZQUIERDA: PRODUCTOS -->
+        <div style="flex: 1; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.2);">
+            <h2 style="margin-bottom: 20px;">🛒 Tu carrito</h2>
+
+            {% if cart %}
+                {% for item in cart %}
+                    <div style="display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+
+                        {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}"
+                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
+                        {% else %}
+                            <div style="width: 80px; height: 80px; background: #eee; border-radius: 8px; margin-right: 15px; display:flex; align-items:center; justify-content:center; color:#777;">
+                                Sin imagen
+                            </div>
+                        {% endif %}
+
+                        <div style="flex: 1;">
+                            <h4 style="margin: 0;">{{ item.product.name }}</h4>
+                            <p style="margin: 5px 0; color: #555;">Cantidad: {{ item.quantity }}</p>
+                        </div>
+
+                        <div style="font-weight: bold; font-size: 16px;">
+                            {{ item.total }} €
+                        </div>
+
                     </div>
-                    {% endif %}
+                {% endfor %}
 
-                    <!-- Info del producto -->
-                    <div style="flex: 1;">
-                        <h4 style="margin: 0;">{{ item.product.nombre }}</h4>
-                        <p style="margin: 5px 0; color: #555;">Cantidad: {{ item.quantity }}</p>
-                    </div>
+                <h3 style="text-align: right; margin-top: 20px;">
+                    Total: <span style="color: #27ae60;">{{ cart.get_total }} €</span>
+                </h3>
 
-                    <!-- Precio -->
-                    <div style="font-weight: bold; font-size: 16px;">
-                        {{ item.total }} €
-                    </div>
-                </div>
-            {% endfor %}
+            {% else %}
+                <p>Tu carrito está vacío.</p>
+            {% endif %}
+        </div>
 
-            <h3 style="text-align: right; margin-top: 20px;">
-                Total: <span style="color: #27ae60;">{{ cart.get_total }} €</span>
-            </h3>
+        <!-- COLUMNA DERECHA: FORMULARIO -->
+        <div style="flex: 1; background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.2);">
+            <h2 style="margin-bottom: 20px;">🧾 Datos de envío</h2>
 
-        {% else %}
-            <p>Tu carrito está vacío.</p>
-        {% endif %}
-    </div>
+            <form method="POST" action="{% url 'order_confirmation' %}">
+                {% csrf_token %}
 
-    <!-- COLUMNA DERECHA: FORMULARIO -->
-    <div style="flex: 1; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <h2 style="margin-bottom: 20px;">🧾 Datos de envío</h2>
+                <label>Nombre completo</label>
+                <input type="text" name="full_name" required class="input">
 
-        <form method="POST" action="{% url 'order_confirmation' %}">
-            {% csrf_token %}
+                <label>Email</label>
+                <input type="email" name="email" required class="input">
 
-            <label>Nombre completo</label>
-            <input type="text" name="full_name" required class="input">
+                <label>Dirección</label>
+                <input type="text" name="address" required class="input">
 
-            <label>Email</label>
-            <input type="email" name="email" required class="input">
+                <label>Ciudad</label>
+                <input type="text" name="city" required class="input">
 
-            <label>Dirección</label>
-            <input type="text" name="address" required class="input">
+                <label>Código postal</label>
+                <input type="text" name="postal_code" required class="input">
 
-            <label>Ciudad</label>
-            <input type="text" name="city" required class="input">
+                <button type="submit"
+                        style="margin-top: 20px; width: 100%; padding: 15px; background: #4a7cff; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer;">
+                    FINALIZAR COMPRA
+                </button>
+            </form>
+        </div>
 
-            <label>Código postal</label>
-            <input type="text" name="postal_code" required class="input">
-
-            <button type="submit" 
-                    style="margin-top: 20px; width: 100%; padding: 15px; background: #27ae60; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer;">
-                FINALIZAR COMPRA
-            </button>
-        </form>
     </div>
 
 </div>
