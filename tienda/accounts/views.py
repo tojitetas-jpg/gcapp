@@ -84,10 +84,18 @@ def profile_view(request):
 
 @login_required
 def edit_profile_view(request):
+    profile = request.user.profile
+
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
 
+        # Guardar foto si se sube
+        if "photo" in request.FILES:
+            profile.photo = request.FILES["photo"]
+            profile.save()
+
+        # Guardar datos del usuario
         user = request.user
         user.username = username
         user.email = email
@@ -96,5 +104,6 @@ def edit_profile_view(request):
         return redirect("profile")
 
     return render(request, "accounts/edit_profile.html", {
-        "user": request.user
+        "user": request.user,
+        "profile": profile
     })

@@ -36,12 +36,7 @@ def products(request):
         products = products.filter(price__lte=max_price)
 
 
-    
-<<<<<<< HEAD
-    return render(request, "all_products.html", {
-=======
     return render(request, "all-products.html", {
->>>>>>> 34af528c4738d6320df89bc10a4702eb6f2c7a18
         "products": products,
         "categories": categories
     })
