@@ -7,11 +7,6 @@ from django.conf.urls.static import static
 from core import views as core_views
 from usuarios import views as user_views
 from productos import views as product_views
-<<<<<<< HEAD
-from pedidos import views as order_views
-from accounts.views import login_view
-=======
->>>>>>> 3cd3724c9ce34b888362e66c4bf813324a1bfb60
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,17 +26,10 @@ urlpatterns = [
     path("publicar/", product_views.publicar_producto, name="publicar_producto"),
 
     # Usuarios
-<<<<<<< HEAD
     path('accounts/', include('accounts.urls')),
-
-=======
-    path("login/", user_views.login_view, name="login"),
-    path("register/", user_views.register_view, name="register"),
-    path("logout/", LogoutView.as_view(), name="logout"),
 
     # Pedidos
     path("", include("pedidos.urls")),
->>>>>>> 3cd3724c9ce34b888362e66c4bf813324a1bfb60
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
