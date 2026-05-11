@@ -1,8 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
+
+<style>
+/* --- ESTILO DEL INPUT DE CANTIDAD --- */
+.quantity-input {
+    width: 70px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 1rem;
+}
+
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+/* Botón de añadir al carrito */
+.primary-button {
+    margin-top: 10px;
+}
+</style>
+
 <section class="section">
   <div class="w-layout-blockcontainer container w-container">
 
@@ -34,14 +57,13 @@
         <a href="{% url 'edit_product' product.id %}" class="button w-button">
           Editar producto
         </a>
+
         <style>
-
           .delete-button:hover{
-
             color: #600000 !important;
           }
-
         </style>
+
         <a href="{% url 'delete_product' product.id %}"
            class="delete-button"
            onclick="return confirm('¿Seguro que quieres borrar este producto?');"
@@ -61,20 +83,24 @@
           {{ product.description }}
         </p>
 
-        <!-- 🟦 BOTONES (NO TOCAR, SON DE WEBFLOW) -->
+        <!-- 🟦 BOTONES (ARREGLADO) -->
         <div class="add-to-cart">
-          <label class="form_field-label">Quantity</label>
-          <input type="number" min="1" value="1" class="form-input quantity-input" disabled />
 
-          <div class="product-page-button-wrapper">
-            <a href="{% url 'add_to_cart' product.id %}" class="primary-button">
-            Add to Cart
-            </a>
+          <form method="POST" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
 
-           
-          </div>
+            <label class="form_field-label">Cantidad</label>
+            <input type="number" name="quantity" min="1" value="1" class="quantity-input" />
+
+            <div class="product-page-button-wrapper">
+              <button type="submit" class="primary-button">
+                Añadir al carrito
+              </button>
+            </div>
+
+          </form>
+
         </div>
-
 
         <!-- 🟦 ACORDEONES -->
         <div class="shop-product-accordion-wrapper">
@@ -82,7 +108,7 @@
           <!-- Detalles -->
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
-              <div class="paragraph-18 text-weight-semibold">Details</div>
+              <div class="paragraph-18 text-weight-semibold">Detalles</div>
             </div>
 
             <div class="shop-product-accordion-details">
@@ -95,12 +121,12 @@
           <!-- Shipping -->
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
-              <div class="paragraph-18 text-weight-semibold">Shipping</div>
+              <div class="paragraph-18 text-weight-semibold">Envío</div>
             </div>
 
             <div class="shop-product-accordion-details">
               <p class="paragraph-16 margin-bottom-16">
-                We offer fast and reliable shipping options. All orders are processed within 1–2 business days.
+                Envíos rápidos y seguros. Procesamos todos los pedidos en 1–2 días hábiles.
               </p>
             </div>
           </div>
@@ -108,12 +134,12 @@
           <!-- Returns -->
           <div class="shop-product-accordion">
             <div class="shop-product-heading">
-              <div class="paragraph-18 text-weight-semibold">Returns</div>
+              <div class="paragraph-18 text-weight-semibold">Devoluciones</div>
             </div>
 
             <div class="shop-product-accordion-details">
               <p class="paragraph-16 margin-bottom-16">
-                If you're not completely satisfied, return it within 30 days for a full refund.
+                Si no estás completamente satisfecho, puedes devolverlo en 30 días para un reembolso completo.
               </p>
             </div>
           </div>
