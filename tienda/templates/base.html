@@ -265,13 +265,22 @@
                 {% if cart_count > 0 %}
                     {% for item in cart %}
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #ddd; padding-bottom:10px;">
+
                             <div style="display:flex; flex-direction:column;">
                                 <strong>{{ item.product.name }}</strong>
                                 <span style="font-size:14px; opacity:0.7;">x{{ item.quantity }}</span>
                             </div>
-                            <div style="font-weight:bold;">
-                                {{ item.product.price }} €
+
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <span style="font-weight:bold;">{{ item.product.price }} €</span>
+
+                                <!-- 🔥 REMOVE -->
+                                <a href="{% url 'remove_from_cart' item.product.id %}"
+                                   style="color:red; font-size:16px; text-decoration:none; font-weight:bold;">
+                                    ✕
+                                </a>
                             </div>
+
                         </div>
                     {% endfor %}
 

@@ -4,102 +4,112 @@
 {% block content %}
 
 <style>
-    .profile-page-wrapper {
-        padding-top: 120px;
-        padding-bottom: 60px;
-        background-color: #f8f8f8;
-    }
 
-    .profile-container {
-        max-width: 1000px;
-        margin: auto;
-        padding: 40px 20px;
-        background-color: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
+.profile-page-wrapper {
+    padding-top: 120px;
+    padding-bottom: 60px;
+    background: #f4f4f4;
+}
 
-    .profile-header {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        margin-bottom: 40px;
-    }
+.profile-container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 30px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
 
-    .profile-photo-wrapper {
-        position: relative;
-        width: 150px;
-        height: 150px;
-    }
+/* HEADER */
+.profile-header {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
 
-    .profile-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        background-color: #ddd;
-        background-size: cover;
-        background-position: center;
-        border: 3px solid #ccc;
-    }
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #ddd;
+}
 
-    .profile-info h2 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: bold;
-    }
+.profile-info h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #222;
+}
 
-    .profile-info p {
-        margin: 5px 0;
-        color: #555;
-    }
+.profile-info p {
+    color: #555;
+}
 
-    .profile-stats {
-        display: flex;
-        gap: 30px;
-        margin-top: 10px;
-    }
+.profile-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
 
-    .profile-stats div {
-        text-align: center;
-    }
+.profile-stats div span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6c5ce7;
+}
 
-    .profile-stats div span {
-        display: block;
-        font-weight: bold;
-        font-size: 18px;
-    }
+/* TITULOS */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #222;
+}
 
-    .profile-actions {
-        margin-top: 20px;
-    }
+/* GRID DE PRODUCTOS */
+.profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+}
 
-    .profile-actions a {
-        margin-right: 10px;
-    }
+.profile-grid-item {
+    height: 240px;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    background-color: #eee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: 0.2s ease;
+}
 
-    .section-title {
-        text-align: center;
-        font-size: 24px;
-        margin-top: 40px;
-        font-weight: bold;
-    }
+.profile-grid-item:hover {
+    transform: scale(1.03);
+}
 
-    .profile-grid {
-        max-width: 1000px;
-        margin: 20px auto 60px auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-    }
+/* PEDIDOS */
+.orders-list {
+    margin-top: 20px;
+}
 
-    .profile-grid-item {
-        width: 100%;
-        height: 250px;
-        background-color: #eee;
-        background-size: cover;
-        background-position: center;
-        border-radius: 10px;
-    }
+.order-card {
+    background: rgba(0,0,0,0.05);
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 4px solid #6c5ce7;
+}
+
+.order-card strong {
+    font-size: 18px;
+    color: #222;
+}
+
+.order-card span {
+    color: #555;
+}
+
 </style>
 
 
@@ -109,16 +119,12 @@
     <!-- CABECERA PERFIL -->
     <div class="profile-header">
 
-      <!-- FOTO DE PERFIL -->
-      <div class="profile-photo-wrapper">
-        <div class="profile-photo"
-             {% if profile.photo %}
-                 style="background-image: url('{{ profile.photo.url }}');"
-             {% endif %}>
-        </div>
+      <div class="profile-photo"
+           {% if profile.photo %}
+               style="background-image: url('{{ profile.photo.url }}');"
+           {% endif %}>
       </div>
 
-      <!-- INFO USUARIO -->
       <div class="profile-info">
         <h2>{{ user.username }}</h2>
         <p>{{ user.email }}</p>
@@ -130,7 +136,7 @@
             Productos
           </div>
           <div>
-            <span>0</span>
+            <span>{{ pedidos.count }}</span>
             Pedidos
           </div>
           <div>
@@ -147,7 +153,7 @@
 
     </div>
 
-    <!-- GRID DE PRODUCTOS -->
+    <!-- PUBLICACIONES -->
     <h2 class="section-title">Mis publicaciones</h2>
 
     <div class="profile-grid">
@@ -163,6 +169,22 @@
         <p style="grid-column: 1 / -1; text-align:center;">
           Todavía no has publicado ningún producto.
         </p>
+      {% endfor %}
+    </div>
+
+    <!-- PEDIDOS -->
+    <h2 class="section-title">Mis pedidos</h2>
+
+    <div class="orders-list">
+      {% for order in pedidos %}
+        <div class="order-card">
+          <strong>Pedido #{{ order.id }}</strong><br>
+          <span>Total: {{ order.total }} €</span><br>
+          <span>Fecha: {{ order.created_at|date:"d/m/Y H:i" }}</span><br>
+          <span>Estado: {{ order.status }}</span>
+        </div>
+      {% empty %}
+        <p style="text-align:center;">No tienes pedidos todavía.</p>
       {% endfor %}
     </div>
 
