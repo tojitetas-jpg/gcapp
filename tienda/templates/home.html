@@ -2,6 +2,52 @@
 
 {% block content %}
 
+<style>
+/* 1. Bajar el hero para que no lo tape el navbar */
+.homepage-hero-section {
+    padding-top: 120px !important; /* Ajustá entre 100–150 si querés */
+    min-height: calc(100vh - 120px) !important; /* Evita que se corte */
+    display: flex;
+    align-items: center;
+}
+
+/* 2. Ocultar la imagen duplicada del placeholder */
+.homepage-hero-section img[src*="placeholder.svg"] {
+    display: none !important;
+}
+
+/* 3. Asegurar que la imagen principal no se deforme */
+.homepage-hero-section .hero-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 4. Responsive móvil */
+@media (max-width: 768px) {
+    .homepage-hero-section {
+        padding-top: 100px !important;
+        text-align: center;
+    }
+
+    .hero-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .hero-image {
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-image img {
+        max-width: 80%;
+    }
+}
+</style>
+
 <section class="homepage-hero-section">
   <div class="container">
     <div class="hero-wrapper">
@@ -9,22 +55,40 @@
         <p class="hero-label">Somos GCapp</p>
         <h1 class="display-heading-1"><strong>Tecnología con una segunda vida</strong></h1>
         <div class="max-width-50rem">
-          <p words-slide-up="" text-split="" class="paragraph-20">Compra, vende o dona dispositivos electrónicos de
-            forma fácil y sostenible. Reparamos, reacondicionamos y reciclamos para reducir residuos y crear impacto
-            positivo.</p>
+          <p words-slide-up="" text-split="" class="paragraph-20">
+            Compra, vende o dona dispositivos electrónicos de forma fácil y sostenible.
+            Reparamos, reacondicionamos y reciclamos para reducir residuos y crear impacto positivo.
+          </p>
         </div>
-        <div class="hero-buttons-container"><a href="/all-products" class="primary-button w-button">Tienda</a><a
-            href="/services" class="secondary-button w-button">servicios</a></div>
+        <div class="hero-buttons-container">
+          <a href="/all-products" class="primary-button w-button">Tienda</a>
+          <a href="/services" class="secondary-button w-button">Servicios</a>
+        </div>
       </div>
-      <div id="w-node-_56e548e9-1f27-74c2-8292-27a5ee61b480-f10188bd" class="hero-image"><img
+
+      <div id="w-node-_56e548e9-1f27-74c2-8292-27a5ee61b480-f10188bd" class="hero-image">
+        <img
           src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210.png"
-          loading="eager" width="Auto" sizes="(max-width: 1536px) 100vw, 1536px" alt=""
-          srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-500.png 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-800.png 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-1080.png 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210.png 1536w"
-          class="hero-image" /><img src="https://cdn.prod.website-files.com/placeholder.svg" loading="lazy" alt="" />
+          loading="eager"
+          width="Auto"
+          sizes="(max-width: 1536px) 100vw, 1536px"
+          alt=""
+          srcset="
+            https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-500.png 500w,
+            https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-800.png 800w,
+            https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210-p-1080.png 1080w,
+            https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69c19e7f82dff5dccc780777_Copilot_20260323_211210.png 1536w
+          "
+          class="hero-image"
+        />
+
+        <!-- Imagen duplicada que ocultamos con CSS -->
+        <img src="https://cdn.prod.website-files.com/placeholder.svg" loading="lazy" alt="" />
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- ⭐⭐⭐ PRODUCTOS POPULARES (DINÁMICO) ⭐⭐⭐ -->
 
