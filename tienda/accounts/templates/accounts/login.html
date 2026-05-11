@@ -1,0 +1,70 @@
+{% extends "base_auth.html" %}
+{% load static %}
+
+{% block content %}
+
+<section id="Contact" class="login-section">
+
+  <div class="login-container login-container-image">
+    <div class="text-block-6">
+      <em class="italic-text-2">GCApp</em>
+    </div>
+  </div>
+
+  <div class="login-container">
+
+    <div class="sign-up-card w-form">
+
+      <form method="post" class="login-form">
+        {% csrf_token %}
+
+        <h1 class="heading-h3 margin-bottom-16 centered-text">Log in</h1>
+
+        {% if error %}
+          <p style="color:red; text-align:center;">{{ error }}</p>
+        {% endif %}
+
+        <div class="sign-up-elements-grid">
+
+          <div class="_100-width">
+            <label for="email">Email Address *</label>
+            <input class="text-field w-input"
+                   type="email"
+                   name="email"
+                   id="email"
+                   required>
+          </div>
+
+          <div class="_100-width">
+            <label for="password">Password *</label>
+            <input class="text-field w-input"
+                   type="password"
+                   name="password"
+                   id="password"
+                   required>
+          </div>
+
+          <div class="login-button-wrapper">
+            <input type="submit" class="primary-button w-button" value="Log in">
+          </div>
+
+          <p class="paragraph-18 centered-text">
+            Don’t have an account?
+            <a href="{% url 'register' %}" class="login-link">Sign up</a>
+          </p>
+
+          <p class="paragraph-18 centered-text">
+            <a href="{% url 'home' %}" class="login-link">Entrar sin cuenta</a>
+          </p>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}
