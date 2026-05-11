@@ -3,6 +3,9 @@ from productos.models import Product
 from .cart import Cart
 from .models import Order, OrderItem
 
+<<<<<<< HEAD
+# Create your views here.
+=======
 def add_to_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -78,3 +81,4 @@ def order_confirmation(request):
 def mis_pedidos(request):
     pedidos = Order.objects.filter(user=request.user)
     return render(request, "mis_pedidos.html", {"pedidos": pedidos})
+>>>>>>> 3cd3724c9ce34b888362e66c4bf813324a1bfb60

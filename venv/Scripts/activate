@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Alma_\OneDrive\Documentos\FP\Proyecto_GCapp\venv"
+VIRTUAL_ENV="C:\Users\l2178\Documents\jing\gcapp\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
