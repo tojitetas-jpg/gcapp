@@ -1,11 +1,6 @@
 venv/
 __pycache__/
 *.pyc
-<<<<<<< HEAD
 *.pyd
 *.pyo
 
-=======
-*.pyo
-*.pyd
->>>>>>> 3cd3724c9ce34b888362e66c4bf813324a1bfb60
