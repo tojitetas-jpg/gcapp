@@ -48,267 +48,255 @@
   <link
     href="https://cdn.prod.website-files.com/66ecb06b29465580bc39d040/66f9e2f649279bcda23519f4_Shutter%20Shop%20%E2%80%93%20256.svg"
     rel="apple-touch-icon" />
-  
-</head>
-
-<!--inicio body / NAVBAR-->
-<body class="body-2">
-
-<div id="cart-overlay" 
-     style="display:none; 
-            position:fixed; 
-            top:0; 
-            left:0; 
-            width:75vw; 
-            height:100vh; 
-            background:rgba(0,0,0,0.6); 
-            z-index:9000 !important;">
-</div>
-
-  <div data-animation="over-right" class="nav-bar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav"
-    data-easing="ease" data-collapse="medium" role="banner" data-duration="300" data-doc-height="1">
-    <header class="container navigation-container">
-      <div class="w-layout-blockcontainer w-container">
-        <div data-w-id="ab395b80-c8f5-403d-64de-ecc9a190fa70" class="div-block-5"><img
-            src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e882f89f1e366b8f0fe953_6711406.png"
-            loading="lazy" sizes="100vw"
-            srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e882f89f1e366b8f0fe953_6711406-p-500.png 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e882f89f1e366b8f0fe953_6711406.png 512w"
-            alt="" class="image-7" /></div>
-
-        <!-- ⭐ MENÚ LATERAL (ÚNICA PARTE MODIFICADA) -->
-        <div class="div-block-6 sidebar">
-          <h1 class="heading-3">Menu</h1>
-
-          <div data-w-id="dc288c23-50b1-6e49-0593-a6a9c4c86e8c" class="div-block-8 close-icon"><img
-              src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1).webp"
-              loading="lazy" sizes="100vw"
-              srcset="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1)-p-500.webp 500w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1)-p-800.webp 800w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1)-p-1080.webp 1080w, https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1).webp 1920w"
-              alt="" class="image-7" /></div>
-
-<div class="w-layout-blockcontainer container-4 w-container">
-
-    {% if request.user.is_authenticated %}
-
-        <a href="{% url 'profile' %}" class="link-2 w-inline-block">perfil</a>
-        <a href="#" class="link-2">ajustes</a>
-        <a href="{% url 'logout' %}" class="link-2">cerrar sesion</a>
-
-    {% else %}
-
-        <a href="{% url 'login' %}" class="link-2">iniciar sesion</a>
-        <a href="{% url 'register' %}" class="link-2">registrarse</a>
-
-    {% endif %}
-
-</div>
-
-        </div>
-
-        <div data-w-id="3773bfc2-efe9-648e-bb7a-2835a6cca2c2" class="div-block-7 overlay"></div>
-      </div>
-
-      <a href="/" id="w-node-_616a8897-8a00-58ac-8dfa-9276fe651a77-fe651a75" aria-current="page"
-        class="nav-logo w-inline-block w--current">
-        <div class="text-block-2">GCapp</div>
-      </a>
 <style>
-.category-block {
-    transition: transform 0.35s ease, filter 0.35s ease;
+/* 🔥 Forzar ancho de la barra de búsqueda */
+.form-block-2,
+.w-form {
+    max-width: 340px !important;
 }
 
-.category-block:hover {
-    transform: scale(1.05);
-    filter: brightness(0.75);
+.text-field-2 {
+    width: 100% !important;
+}
+
+/* 🔥 Separar Publicar y Contact */
+.container-3 {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* 🔥 Botón destacado para Publicar producto */
+.nav-link.publish-btn {
+    background: #6c5ce7;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: white !important;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.nav-link.publish-btn:hover {
+    background: #7d6bff;
+    transform: translateY(-2px);
 }
 </style>
 
-<nav role="navigation" id="w-node-_616a8897-8a00-58ac-8dfa-9276fe651a79-fe651a75"
-    class="nav-links-conatiner w-nav-menu">
+</head>
 
-    <div data-hover="false" data-delay="0" class="nav-dropdown w-dropdown">
-        <div class="nav-link nav-link-dropdown w-dropdown-toggle">
-            <div class="text-block">Shop</div>
-            <div class="nav-arrow w-icon-dropdown-toggle"></div>
-        </div>
+<body class="body-2">
 
-        <nav class="nav_dropdown-list w-dropdown-list">
-            <div class="w-layout-grid grid-3">
-
-                <!-- ALL PRODUCTS -->
-                <a id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a79-fe651a75"
-                   href="{% url 'products' %}"
-                   class="link-block-2 w-inline-block">
-                    <div class="text-block-5">All Products</div>
-                </a>
-
-                <!-- CATEGORÍAS DINÁMICAS -->
-                <div id="w-node-d935e4dc-10dc-6ed5-d7e3-5b1cab974a7c-fe651a75"
-                     class="collection-list-wrapper-7 w-dyn-list">
-
-                    <div role="list" class="collection-list-4 w-dyn-items">
-
-                        {% for cat in categories %}
-                        <div role="listitem" class="collection-item-4 w-dyn-item">
-
-                            <a href="{% url 'category_products' cat.slug %}"
-                               class="link-block-2 w-inline-block category-block"
-                               style="
-                                   width:100%;
-                                   height:100%;
-                                   display:flex;
-                                   align-items:center;
-                                   justify-content:center;
-                                   position:relative;
-                                   overflow:hidden;
-                                   background-size:cover;
-                                   background-position:center;
-                                   background-repeat:no-repeat;
-                                   {% if cat.image and cat.image.name %}
-                                       background-image:url('{{ cat.image.url }}');
-                                   {% else %}
-                                       background-color:#222;
-                                   {% endif %}
-                               ">
-
-                                <div style="
-                                    position:absolute;
-                                    inset:0;
-                                    background:rgba(0,0,0,0.45);
-                                "></div>
-
-                                <div style="
-                                    position:relative;
-                                    z-index:2;
-                                    color:white;
-                                    font-weight:700;
-                                    font-size:1.2rem;
-                                    text-align:center;
-                                    text-shadow:0 2px 6px rgba(0,0,0,0.8);
-                                ">
-                                    {{ cat.name }}
-                                </div>
-
-                            </a>
-
-                        </div>
-                        {% endfor %}
-
-                    </div>
-                </div>
-
-            </div>
-        </nav>
-    </div>
-
-    <a href="/services" class="nav-link">Services</a>
-    <a href="#News" class="nav-link">Blog</a>
-    <a href="/about" class="nav-link">About</a>
-
-</nav>
-
-
-<!-- 🔥 ESTA ES LA ÚNICA BARRA DE BÚSQUEDA QUE QUEDA (WEBFLOW) -->
-<div id="w-node-d2739a7b-7fc7-fdc1-0fbb-7f117846a3a3-fe651a75" class="form-block-2 w-form">
-      <form action="{% url 'products' %}#productos" method="get">
-        <input
-            class="text-field-2 w-input"
-            maxlength="256"
-            name="search"
-            placeholder="Buscar..."
-            type="text"
-            id="search"
-            value="{{ request.GET.search }}"
-        />
-    </form>
+<!-- 🔥 OVERLAY DEL CARRITO -->
+<div id="cart-overlay" 
+     style="display:none; position:fixed; top:0; left:0; width:75vw; height:100vh; background:rgba(0,0,0,0.6); z-index:9000 !important;">
 </div>
 
+<!-- 🔥 NAVBAR WEBFLOW COMPLETO -->
+<div data-animation="over-right" class="nav-bar w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav"
+     data-easing="ease" data-collapse="medium" role="banner" data-duration="300" data-doc-height="1">
 
-      <div class="w-layout-blockcontainer container-3 w-container"><a href="/publicar/" class="nav-link">Publicar producto</a>
-        <a href="/contact" class="nav-link contact">Contact</a>
-<div class="card-wrapper nav-cart">
-    <a href="#" class="primary-button primary-button-cart nav-cart-toggle">
-        🛒 Cart ({{ cart_count }})
+<header class="container navigation-container">
+
+    <div class="w-layout-blockcontainer w-container">
+
+        <!-- LOGO -->
+        <div data-w-id="ab395b80-c8f5-403d-64de-ecc9a190fa70" class="div-block-5">
+            <img src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e882f89f1e366b8f0fe953_6711406.png"
+                 loading="lazy" alt="" class="image-7" />
+        </div>
+
+        <!-- ⭐ SIDEBAR -->
+        <div class="div-block-6 sidebar">
+            <h1 class="heading-3">Menu</h1>
+
+            <div data-w-id="dc288c23-50b1-6e49-0593-a6a9c4c86e8c" class="div-block-8 close-icon">
+                <img src="https://cdn.prod.website-files.com/69bfd32e6843e2faf101887b/69e9f19c5d97b84165bd4bbb_left-arrow-icon-on-transparent-background-free-png%20(1).webp"
+                     loading="lazy" alt="" class="image-7" />
+            </div>
+
+            <div class="w-layout-blockcontainer container-4 w-container">
+
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'profile' %}" class="link-2 w-inline-block">perfil</a>
+                    <a href="#" class="link-2">ajustes</a>
+                    <a href="{% url 'logout' %}" class="link-2">cerrar sesion</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="link-2">iniciar sesion</a>
+                    <a href="{% url 'register' %}" class="link-2">registrarse</a>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- OVERLAY -->
+        <div data-w-id="3773bfc2-efe9-648e-bb7a-2835a6cca2c2" class="div-block-7 overlay"></div>
+
+    </div>
+
+    <!-- LOGO TEXTO -->
+    <a href="/" class="nav-logo w-inline-block">
+        <div class="text-block-2">GCapp</div>
     </a>
 
-    <div class="nav-cart-dropdown"
-     style="
-        display:none;
-        position:fixed;
-        right:0;
-        top:0;
-        height:100vh;
-        width:25vw;
-        max-width:480px;
-        background:#fff;
-        border-left:1px solid #ddd;
-        padding:25px;
-        box-shadow:-4px 0 20px rgba(0,0,0,0.25);
-        z-index:9999 !important;
-        overflow-y:auto;
-     ">
-        
-        <div style="display:flex; justify-content:flex-start; margin-bottom:20px;">
-    <span id="close-cart" 
-          style="cursor:pointer; font-size:22px; font-weight:bold;">
-        ← Back
-    </span>
-</div>
+    <!-- ESTILO DE CATEGORÍAS -->
+    <style>
+    .category-block {
+        transition: transform 0.35s ease, filter 0.35s ease;
+    }
+    .category-block:hover {
+        transform: scale(1.05);
+        filter: brightness(0.75);
+    }
+    </style>
 
-        {% if cart_count > 0 %}
-            
-            {% for item in cart %}
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #ddd; padding-bottom:10px;">
-                    
-                    <div style="display:flex; flex-direction:column;">
-                        <strong>{{ item.product.name }}</strong>
-                        <span style="font-size:14px; opacity:0.7;">x{{ item.quantity }}</span>
-                    </div>
+    <!-- NAV LINKS -->
+    <nav role="navigation" class="nav-links-conatiner w-nav-menu">
 
-                    <div style="font-weight:bold;">
-                        {{ item.product.price }} €
-                    </div>
-                </div>
-            {% endfor %}
-
-            <div style="margin-top:15px; font-size:18px; font-weight:bold; display:flex; justify-content:space-between;">
-                <span>Subtotal</span>
-                <span>{{ cart.get_total }} €</span>
+        <!-- SHOP DROPDOWN -->
+        <div data-hover="false" data-delay="0" class="nav-dropdown w-dropdown">
+            <div class="nav-link nav-link-dropdown w-dropdown-toggle">
+                <div class="text-block">Shop</div>
+                <div class="nav-arrow w-icon-dropdown-toggle"></div>
             </div>
 
-            <a href="{% url 'checkout' %}" 
-               style="margin-top:20px; display:block; width:100%; text-align:center; background:#6c5ce7; color:white; padding:12px; border-radius:8px; font-weight:bold;">
-                CONTINUE TO CHECKOUT
+            <nav class="nav_dropdown-list w-dropdown-list">
+                <div class="w-layout-grid grid-3">
+
+                    <a href="{% url 'products' %}" class="link-block-2 w-inline-block">
+                        <div class="text-block-5">All Products</div>
+                    </a>
+
+                    <div class="collection-list-wrapper-7 w-dyn-list">
+                        <div role="list" class="collection-list-4 w-dyn-items">
+
+                            {% for cat in categories %}
+                            <div role="listitem" class="collection-item-4 w-dyn-item">
+
+                                <a href="{% url 'category_products' cat.slug %}"
+                                   class="link-block-2 w-inline-block category-block"
+                                   style="
+                                       width:100%;
+                                       height:100%;
+                                       display:flex;
+                                       align-items:center;
+                                       justify-content:center;
+                                       position:relative;
+                                       overflow:hidden;
+                                       background-size:cover;
+                                       background-position:center;
+                                       background-repeat:no-repeat;
+                                       {% if cat.image %}
+                                           background-image:url('{{ cat.image.url }}');
+                                       {% else %}
+                                           background-color:#222;
+                                       {% endif %}
+                                   ">
+
+                                    <div style="position:absolute; inset:0; background:rgba(0,0,0,0.45);"></div>
+
+                                    <div style="position:relative; z-index:2; color:white; font-weight:700; font-size:1.2rem; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,0.8);">
+                                        {{ cat.name }}
+                                    </div>
+
+                                </a>
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+
+        <a href="/services" class="nav-link">Services</a>
+        <a href="#News" class="nav-link">Blog</a>
+        <a href="/about" class="nav-link">About</a>
+
+    </nav>
+
+    <!-- BARRA DE BÚSQUEDA -->
+    <div class="form-block-2 w-form">
+        <form action="{% url 'products' %}#productos" method="get">
+            <input class="text-field-2 w-input"
+                   name="search"
+                   placeholder="Buscar..."
+                   type="text"
+                   value="{{ request.GET.search }}" />
+        </form>
+    </div>
+
+    <!-- PUBLICAR + CONTACT + CARRITO -->
+    <div class="w-layout-blockcontainer container-3 w-container">
+
+        <a href="/contact" class="nav-link contact">Contact</a>
+        <a href="/publicar/" class="nav-link publish-btn">Publicar producto</a>
+
+        <!-- CARRITO -->
+        <div class="card-wrapper nav-cart">
+            <a href="#" class="primary-button primary-button-cart nav-cart-toggle">
+                🛒 Cart ({{ cart_count }})
             </a>
 
-        {% else %}
-            <p style="text-align:center; opacity:0.7;">No items found.</p>
-        {% endif %}
+            <div class="nav-cart-dropdown"
+                 style="
+                    display:none;
+                    position:fixed;
+                    right:0;
+                    top:0;
+                    height:100vh;
+                    width:25vw;
+                    max-width:480px;
+                    background:#fff;
+                    border-left:1px solid #ddd;
+                    padding:25px;
+                    box-shadow:-4px 0 20px rgba(0,0,0,0.25);
+                    z-index:9999 !important;
+                    overflow-y:auto;
+                 ">
+
+                <div style="display:flex; justify-content:flex-start; margin-bottom:20px;">
+                    <span id="close-cart" style="cursor:pointer; font-size:22px; font-weight:bold;">
+                        ← Back
+                    </span>
+                </div>
+
+                {% if cart_count > 0 %}
+                    {% for item in cart %}
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid #ddd; padding-bottom:10px;">
+                            <div style="display:flex; flex-direction:column;">
+                                <strong>{{ item.product.name }}</strong>
+                                <span style="font-size:14px; opacity:0.7;">x{{ item.quantity }}</span>
+                            </div>
+                            <div style="font-weight:bold;">
+                                {{ item.product.price }} €
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div style="margin-top:15px; font-size:18px; font-weight:bold; display:flex; justify-content:space-between;">
+                        <span>Subtotal</span>
+                        <span>{{ cart.get_total }} €</span>
+                    </div>
+
+                    <a href="{% url 'checkout' %}" 
+                       style="margin-top:20px; display:block; width:100%; text-align:center; background:#6c5ce7; color:white; padding:12px; border-radius:8px; font-weight:bold;">
+                        CONTINUE TO CHECKOUT
+                    </a>
+
+                {% else %}
+                    <p style="text-align:center; opacity:0.7;">No items found.</p>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
+
+</header>
 </div>
 
-                    
-                  </form>
-                  <div class="w-commerce-commercecartemptystate">
-                    <div aria-label="This cart is empty" aria-live="polite">No items found.</div>
-                  </div>
-                  <div aria-live="assertive" style="display:none" data-node-type="commerce-cart-error"
-                    class="w-commerce-commercecarterrorstate">
-                    <div class="w-cart-error-msg"
-                      data-w-cart-quantity-error="Product is not available in this quantity."
-                      data-w-cart-general-error="Something went wrong when adding this item to the cart."
-                      data-w-cart-checkout-error="Checkout is disabled on this site."
-                      data-w-cart-cart_order_min-error="The order minimum was not met. Add more items to your cart to continue."
-                      data-w-cart-subscription_error-error="Before you purchase, please use your email invite to verify your address so we can send order updates.">
-                      Product is not available in this quantity.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
+
 
   <!-----------------INICIO CONTENIDO PAGINAS------------------------>
 

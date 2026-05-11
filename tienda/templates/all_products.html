@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
 
 <!-- HERO -->
@@ -16,7 +15,7 @@
   </div>
 </section>
 
-<!-- CATEGORÍAS DINÁMICAS -->
+<!-- ⭐⭐⭐ CATEGORÍAS DINÁMICAS (RESTAURADAS) ⭐⭐⭐ -->
 <section class="section-2">
   <div class="w-layout-blockcontainer container-2 w-container">
     <div class="collection-list-wrapper-4 w-dyn-list">
@@ -46,171 +45,36 @@
   </div>
 </section>
 
-<!-- ⭐⭐⭐ SECCIÓN DE PRODUCTOS ⭐⭐⭐ -->
-<section id="productos" class="section section-black" style="width: 100%;">
+<!-- ⭐⭐⭐ FILTROS COMPLETOS ⭐⭐⭐ -->
+<form method="GET" action="#productos" class="filters">
 
-  <!-- TÍTULO -->
-  <h2 class="heading" style="margin-bottom: 30px;">Productos</h2>
+    <input type="text" name="search" placeholder="Buscar..." value="{{ request.GET.search }}">
 
-  <!-- ⭐⭐⭐ FILTROS BONITOS ⭐⭐⭐ -->
-  <div class="w-layout-blockcontainer container w-container">
-
-    <form method="GET"
-      action="{% url 'products' %}#productos"
-      class="filters"
-      style="
-        display:flex;
-        gap:15px;
-        flex-wrap:wrap;
-        margin-bottom:40px;
-        background:rgba(255,255,255,0.08);
-        padding:20px;
-        border-radius:12px;
-        backdrop-filter:blur(6px);
-      ">
-
-      <!-- BUSCADOR -->
-      <input type="text"
-             name="search"
-             placeholder="Buscar..."
-             value="{{ request.GET.search }}"
-             class="form-input"
-             style="
-               padding:10px 14px;
-               border-radius:8px;
-               border:1px solid rgba(255,255,255,0.4);
-               background:rgba(255,255,255,0.12);
-               color:white;
-               min-width:180px;
-             ">
-
-      <!-- ESTADO -->
-      <select name="condition" class="form-input"
-              style="
-                padding:10px 14px;
-                border-radius:8px;
-                border:1px solid rgba(255,255,255,0.4);
-                background:rgba(255,255,255,0.12);
-                color:white;
-                min-width:150px;
-              ">
+    <select name="condition">
         <option value="">Estado</option>
-        <option value="usado" {% if request.GET.condition == "usado" %}selected{% endif %}>Usado</option>
-        <option value="reparado" {% if request.GET.condition == "reparado" %}selected{% endif %}>Reparado</option>
-        <option value="reacondicionado" {% if request.GET.condition == "reacondicionado" %}selected{% endif %}>Reacondicionado</option>
-        <option value="nuevo" {% if request.GET.condition == "nuevo" %}selected{% endif %}>Nuevo</option>
-      </select>
+        <option value="usado" {% if request.GET.condition == 'usado' %}selected{% endif %}>Usado</option>
+        <option value="reparado" {% if request.GET.condition == 'reparado' %}selected{% endif %}>Reparado</option>
+        <option value="reacondicionado" {% if request.GET.condition == 'reacondicionado' %}selected{% endif %}>Reacondicionado</option>
+        <option value="nuevo" {% if request.GET.condition == 'nuevo' %}selected{% endif %}>Nuevo</option>
+    </select>
 
-      <!-- CATEGORÍA -->
-      <select name="category" class="form-input"
-              style="
-                padding:10px 14px;
-                border-radius:8px;
-                border:1px solid rgba(255,255,255,0.4);
-                background:rgba(255,255,255,0.12);
-                color:white;
-                min-width:150px;
-              ">
+    <select name="category">
         <option value="">Categoría</option>
         {% for cat in categories %}
-          <option value="{{ cat.id }}"
-            {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
-            {{ cat.name }}
-          </option>
+            <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
+                {{ cat.name }}
+            </option>
         {% endfor %}
-      </select>
+    </select>
 
-      <!-- PRECIO MÍNIMO -->
-      <input type="number"
-             name="min_price"
-             placeholder="Precio mínimo"
-             value="{{ request.GET.min_price }}"
-             class="form-input"
-             style="
-               padding:10px 14px;
-               border-radius:8px;
-               border:1px solid rgba(255,255,255,0.4);
-               background:rgba(255,255,255,0.12);
-               color:white;
-               min-width:150px;
-             ">
+    <input type="number" name="min_price" placeholder="Precio mínimo" value="{{ request.GET.min_price }}">
+    <input type="number" name="max_price" placeholder="Precio máximo" value="{{ request.GET.max_price }}">
 
-      <!-- PRECIO MÁXIMO -->
-      <input type="number"
-             name="max_price"
-             placeholder="Precio máximo"
-             value="{{ request.GET.max_price }}"
-             class="form-input"
-             style="
-               padding:10px 14px;
-               border-radius:8px;
-               border:1px solid rgba(255,255,255,0.4);
-               background:rgba(255,255,255,0.12);
-               color:white;
-               min-width:150px;
-             ">
+    <button type="submit" class="primary-button">Filtrar</button>
 
-      <!-- BOTÓN -->
-      <button type="submit"
-              class="primary-button"
-              style="
-                padding:10px 20px;
-                border-radius:8px;
-                background:#4a7cff;
-                color:white;
-                border:none;
-                font-weight:600;
-              ">
-        Filtrar
-      </button>
+</form>
 
-    </form>
-
-  </div>
-
-  <!-- GRID DE PRODUCTOS -->
-  <div class="container">
-    <div class="collection-list-wrapper-8 w-dyn-list">
-      <div role="list" class="all-products-grid w-dyn-items">
-
-        {% for product in products %}
-        <div role="listitem" class="producto w-dyn-item">
-
-          <a href="{% url 'product' product.id %}" class="products-card-link w-inline-block">
-
-            <div class="products-item-image-wrapper">
-              {% if product.image %}
-              <img class="products-item-image"
-                src="{{ product.image.url }}"
-                loading="lazy">
-              {% endif %}
-            </div>
-
-            <div class="products-item-text-wrapper">
-              <h3 class="heading-h4 heading-h4-white nombre">
-                {{ product.name }}
-              </h3>
-
-              <div class="products-item-description-wrapper">
-                <p class="product-list-desciption product-list-desciption-white descripcion">
-                  {{ product.description }}
-                </p>
-
-                <p class="product-list-desciption product-list-desciption-white">
-                  € {{ product.price }}
-                </p>
-              </div>
-            </div>
-
-          </a>
-
-        </div>
-        {% endfor %}
-
-      </div>
-    </div>
-  </div>
-
-</section>
+<!-- ⭐⭐⭐ GRID + CARDS ⭐⭐⭐ -->
+{% include "product_card.html" %}
 
 {% endblock %}

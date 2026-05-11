@@ -3,7 +3,7 @@ from productos.models import Product
 
 def home(request):
     popular_products = Product.objects.filter(popular=True)[:3]
-    best_price_products = Product.objects.filter(best_price=True)[:3]
+    best_price_products = Product.objects.order_by('price')[:3]
     return render(request, 'home.html', {
 
         'popular_products': popular_products,
