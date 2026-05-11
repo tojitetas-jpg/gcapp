@@ -26,12 +26,11 @@ urlpatterns = [
     path("publicar/", product_views.publicar_producto, name="publicar_producto"),
 
     # Usuarios
-    path("login/", user_views.login_view, name="login"),
-    path("register/", user_views.register_view, name="register"),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    path('accounts/', include('accounts.urls')),
 
     # Pedidos
     path("", include("pedidos.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
