@@ -4,6 +4,25 @@ from .forms import ProductForm
 from django.db.models import Q
 
 
+# -----------------------------------------
+#   HOME (para sliders Netflix)
+# -----------------------------------------
+def home(request):
+    # Productos populares (marcados en la BD)
+    popular_products = Product.objects.filter(is_popular=True)[:10]
+
+    # Mejores precios (los más baratos)
+    best_price_products = Product.objects.order_by('price')[:10]
+
+    return render(request, "home.html", {
+        "popular_products": popular_products,
+        "best_price_products": best_price_products,
+    })
+
+
+# -----------------------------------------
+#   TODOS LOS PRODUCTOS + FILTROS
+# -----------------------------------------
 def products(request):
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -29,24 +48,29 @@ def products(request):
 
     # FILTRO POR PRECIO MÍNIMO
     if min_price:
-     products = products.filter(price__gte=min_price)
+        products = products.filter(price__gte=min_price)
 
     # FILTRO POR PRECIO MÁXIMO
     if max_price:
         products = products.filter(price__lte=max_price)
-
 
     return render(request, "all_products.html", {
         "products": products,
         "categories": categories
     })
 
+
+# -----------------------------------------
+#   PRODUCTO INDIVIDUAL
+# -----------------------------------------
 def product(request, id):
     product = get_object_or_404(Product, id=id)
     return render(request, "product.html", {"product": product})
 
 
-
+# -----------------------------------------
+#   PRODUCTOS POR CATEGORÍA + FILTROS
+# -----------------------------------------
 def category_products(request, slug):
     category = Category.objects.get(slug=slug)
     products = Product.objects.filter(category=category)
@@ -77,6 +101,9 @@ def category_products(request, slug):
     })
 
 
+# -----------------------------------------
+#   PUBLICAR PRODUCTO
+# -----------------------------------------
 def publicar_producto(request):
     if request.method == "POST":
         product = Product.objects.create(
@@ -87,7 +114,6 @@ def publicar_producto(request):
             image=request.FILES.get("image"),
             category=Category.objects.get(id=request.POST.get("category")),
             condition=request.POST.get("condition"),
-
         )
 
         product.user = request.user
@@ -99,11 +125,18 @@ def publicar_producto(request):
     return render(request, "publicar_producto.html", {"categories": categorias})
 
 
+# -----------------------------------------
+#   ELIMINAR PRODUCTO
+# -----------------------------------------
 def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     product.delete()
-    return redirect("products")  # te lleva a all-products
+    return redirect("products")
 
+
+# -----------------------------------------
+#   EDITAR PRODUCTO
+# -----------------------------------------
 def edit_product(request, id):
     product = get_object_or_404(Product, id=id)
 
@@ -119,5 +152,3 @@ def edit_product(request, id):
         "form": form,
         "product": product
     })
-
-

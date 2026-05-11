@@ -46,7 +46,7 @@
         position: absolute;
         bottom: 0;
         right: 0;
-        background-color: #007bff;
+        background-color: #6c5ce7;
         color: #fff;
         border-radius: 50%;
         width: 36px;
@@ -57,6 +57,11 @@
         font-size: 18px;
         cursor: pointer;
         border: 2px solid #fff;
+        transition: 0.2s ease;
+    }
+
+    .change-photo-btn:hover {
+        background-color: #7d6bff;
     }
 
     .change-photo-input {
@@ -85,13 +90,19 @@
     .save-btn {
         width: 100%;
         padding: 14px;
-        background-color: #007bff;
+        background-color: #6c5ce7;
         color: #fff;
         border-radius: 10px;
         border: none;
         font-size: 18px;
         cursor: pointer;
         margin-top: 10px;
+        transition: 0.2s ease;
+    }
+
+    .save-btn:hover {
+        background-color: #7d6bff;
+        transform: translateY(-2px);
     }
 
     .back-btn {
@@ -99,6 +110,7 @@
         text-align: center;
         margin-top: 20px;
         font-size: 16px;
+        color: #6c5ce7;
     }
 </style>
 
@@ -108,24 +120,24 @@
 
         <h1>Editar perfil</h1>
 
-        <!-- FOTO DE PERFIL -->
-        <div class="profile-photo-wrapper">
-            <div class="profile-photo"
-                 id="preview-photo"
-                 {% if profile.photo %}
-                     style="background-image: url('{{ profile.photo.url }}');"
-                 {% endif %}>
-            </div>
-
-            <label class="change-photo-btn">
-                +
-                <input type="file" name="photo" id="photo-input" class="change-photo-input" accept="image/*">
-            </label>
-        </div>
-
         <!-- FORMULARIO -->
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+
+            <!-- FOTO DE PERFIL -->
+            <div class="profile-photo-wrapper">
+                <div class="profile-photo"
+                     id="preview-photo"
+                     {% if profile.photo %}
+                         style="background-image: url('{{ profile.photo.url }}');"
+                     {% endif %}>
+                </div>
+
+                <label class="change-photo-btn">
+                    +
+                    <input type="file" name="photo" id="photo-input" class="change-photo-input" accept="image/*">
+                </label>
+            </div>
 
             <div class="form-group">
                 <label>Nombre de usuario</label>
@@ -139,7 +151,7 @@
 
             <div class="form-group">
                 <label>Biografía</label>
-                <textarea name="bio" rows="4">Aquí tu biografía…</textarea>
+                <textarea name="bio" rows="4">{{ profile.bio }}</textarea>
             </div>
 
             <button type="submit" class="save-btn">Guardar cambios</button>

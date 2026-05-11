@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
 
-# IMPORTA TUS PRODUCTOS
-from productos.models import Product   # ← Ajusta si tu modelo se llama distinto
+# Modelos
+from productos.models import Product
+from pedidos.models import Order
+from accounts.models import Profile
 
 
 # -----------------------------
@@ -24,12 +25,14 @@ def register_view(request):
             return render(request, 'accounts/register.html', {'error': 'Ese email ya está registrado'})
 
         user = User.objects.create_user(username=username, email=email, password=password)
-        login(request, user)
 
+        # Crear perfil automáticamente
+        Profile.objects.create(user=user)
+
+        login(request, user)
         return redirect('home')
 
     return render(request, 'accounts/register.html')
-
 
 
 # -----------------------------
@@ -39,9 +42,6 @@ def login_view(request):
     if request.method == 'POST':
         email    = request.POST.get('email')
         password = request.POST.get('password')
-
-        print("EMAIL RECIBIDO:", email)
-        print("PASSWORD RECIBIDO:", password)
 
         try:
             user_obj = User.objects.get(email=email)
@@ -60,7 +60,6 @@ def login_view(request):
     return render(request, 'accounts/login.html')
 
 
-
 # -----------------------------
 #   LOGOUT
 # -----------------------------
@@ -69,37 +68,50 @@ def logout_view(request):
     return redirect('login')
 
 
-
 # -----------------------------
-#   PERFIL TIPO INSTAGRAM
+#   PERFIL
 # -----------------------------
 @login_required
 def profile_view(request):
+
+    # 🔥 FIX DEFINITIVO: crear perfil si no existe
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
     productos = Product.objects.filter(user=request.user)
+    pedidos = Order.objects.filter(user=request.user).order_by('-created_at')
 
     return render(request, 'accounts/profile.html', {
         'user': request.user,
-        'products': productos
+        'profile': profile,
+        'products': productos,
+        'pedidos': pedidos,
     })
 
+
+# -----------------------------
+#   EDITAR PERFIL
+# -----------------------------
 @login_required
 def edit_profile_view(request):
-    profile = request.user.profile
+
+    # 🔥 FIX: asegurar que el perfil existe
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
-        username = request.POST.get("username")
-        email = request.POST.get("email")
 
-        # Guardar foto si se sube
+        # Actualizar datos del usuario
+        request.user.username = request.POST.get("username")
+        request.user.email = request.POST.get("email")
+        request.user.save()
+
+        # Actualizar bio
+        profile.bio = request.POST.get("bio")
+
+        # Guardar foto si se subió
         if "photo" in request.FILES:
             profile.photo = request.FILES["photo"]
-            profile.save()
 
-        # Guardar datos del usuario
-        user = request.user
-        user.username = username
-        user.email = email
-        user.save()
+        profile.save()
 
         return redirect("profile")
 

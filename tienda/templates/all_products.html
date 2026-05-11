@@ -2,6 +2,58 @@
 {% load static %}
 {% block content %}
 
+<style>
+
+/* --- CONTENEDOR DE FILTROS --- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 18px;
+    margin: 30px auto 40px auto;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    max-width: 1100px;
+}
+
+/* --- INPUTS Y SELECTS --- */
+.filters input,
+.filters select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 0.95rem;
+    min-width: 160px;
+    flex: 1;
+}
+
+.filters input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+/* --- BOTÓN FILTRAR --- */
+.filters button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.filters button:hover {
+    background: #7d6bff;
+    transform: translateY(-2px);
+}
+
+</style>
+
 <!-- HERO -->
 <section class="section section-produtcs-hero">
   <div class="w-layout-blockcontainer container w-container">
@@ -15,7 +67,7 @@
   </div>
 </section>
 
-<!-- ⭐⭐⭐ CATEGORÍAS DINÁMICAS (RESTAURADAS) ⭐⭐⭐ -->
+<!-- CATEGORÍAS -->
 <section class="section-2">
   <div class="w-layout-blockcontainer container-2 w-container">
     <div class="collection-list-wrapper-4 w-dyn-list">
@@ -25,10 +77,7 @@
         <div class="collection-item-3 w-dyn-item">
 
           {% if cat.image %}
-            <img loading="lazy"
-              src="{{ cat.image.url }}"
-              alt="{{ cat.name }}"
-              class="image-5">
+            <img loading="lazy" src="{{ cat.image.url }}" alt="{{ cat.name }}" class="image-5">
           {% else %}
             <div class="image-5 placeholder-circle"></div>
           {% endif %}
@@ -45,7 +94,7 @@
   </div>
 </section>
 
-<!-- ⭐⭐⭐ FILTROS COMPLETOS ⭐⭐⭐ -->
+<!-- FILTROS -->
 <form method="GET" action="#productos" class="filters">
 
     <input type="text" name="search" placeholder="Buscar..." value="{{ request.GET.search }}">
@@ -74,7 +123,7 @@
 
 </form>
 
-<!-- ⭐⭐⭐ GRID + CARDS ⭐⭐⭐ -->
+<!-- GRID -->
 {% include "product_card.html" %}
 
 {% endblock %}
