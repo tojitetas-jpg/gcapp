@@ -5,7 +5,7 @@
 
 <style>
     .profile-page-wrapper {
-        padding-top: 120px;  /* ⭐ separa del navbar */
+        padding-top: 120px;
         padding-bottom: 60px;
         background-color: #f8f8f8;
     }
@@ -116,7 +116,7 @@
     .profile-grid-item {
         width: 100%;
         height: 250px;
-        background-color: #eee;
+        background-color: #eee; /* ⭐ si no hay imagen, se ve gris */
         background-size: cover;
         background-position: center;
         border-radius: 10px;
@@ -133,10 +133,9 @@
       <!-- FOTO + BOTÓN CAMBIAR -->
       <div class="profile-photo-wrapper">
         <div class="profile-photo"
-             style="background-image: url('{% static "img/default-profile.png" %}');">
+             style="background-image: url('{% static 'img/default-profile.png' %}');">
         </div>
 
-        <!-- Botón para cambiar imagen (solo visual de momento) -->
         <label class="change-photo-btn">
           +
           <input type="file" class="change-photo-input" accept="image/*">
@@ -175,20 +174,21 @@
     <!-- GRID DE PRODUCTOS -->
     <h2 class="section-title">Mis publicaciones</h2>
 
-<div class="profile-grid">
-  {% for p in products %}
-    <a href="{% url 'product' p.id %}">
-      <div class="profile-grid-item"
-        style="background-image: url({% if p.image %}'{{ p.image.url }}'{% else %}'{% static "img/default-product.png" %}'{% endif %});">
-      </div>
-    </a>
-  {% empty %}
-    <p style="grid-column: 1 / -1; text-align:center;">
-      Todavía no has publicado ningún producto.
-    </p>
-  {% endfor %}
-</div>
-
+    <div class="profile-grid">
+      {% for p in products %}
+        <a href="{% url 'product' p.id %}">
+          <div class="profile-grid-item"
+               {% if p.image %}
+                 style="background-image: url('{{ p.image.url }}');"
+               {% endif %}>
+          </div>
+        </a>
+      {% empty %}
+        <p style="grid-column: 1 / -1; text-align:center;">
+          Todavía no has publicado ningún producto.
+        </p>
+      {% endfor %}
+    </div>
 
   </div>
 </div>
