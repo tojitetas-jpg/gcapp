@@ -26,13 +26,14 @@ def register_view(request):
 
         user = User.objects.create_user(username=username, email=email, password=password)
 
-        # Crear perfil automáticamente
-        Profile.objects.create(user=user)
+        # Crear perfil sin duplicar
+        Profile.objects.get_or_create(user=user)
 
         login(request, user)
         return redirect('home')
 
     return render(request, 'accounts/register.html')
+
 
 
 # -----------------------------
